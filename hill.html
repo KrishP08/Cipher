@@ -9,7 +9,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #e9ecef;
             color: #343a40;
-            margin: 20px;
+            margin: 0; /* Reset margin */
             padding: 20px;
             border-radius: 8px;
         }
@@ -79,41 +79,30 @@
             }
         }
         
-        @media (max-width: 768px) {
-            input[type="text"] {
-                width: calc(100% - 22px); /* Adjust for padding */
-            }
-        }
         .matrix-container {
-            display: flex; /* Use flexbox */
-            flex-direction: column; /* Arrange items in a column */
-            gap: 10px; /* Space between inputs */
+            display: flex; 
+            flex-direction: column; 
+            gap: 10px; 
             margin-bottom: 20px;
         }
         
-        .matrix-cell {
-            width: 100%; /* Make inputs take full width */
-            max-width: 60px; /* Limit max width for aesthetic */
-            padding: 10px;
-            border: 1px solid #ced4da;
-            border-radius: 3px;
-            text-align: center;
-            background-color: #f8f9fa;
-            transition: border-color 0.2s, background-color 0.2s;
+  
+        /* Adjust body padding for navbar height */
+        body {
+            padding-top: 50px; /* Add space for the fixed navbar */
         }
-        
-        .matrix-cell:focus {
-            outline: none;
-            border-color: #007bff;
-            background-color: #e2e6ea;
-        }
-        
-        /* Other styles remain unchanged */
-        
     </style>
-    
+    <link rel="stylesheet" href="nav.css">
 </head>
 <body>
+    <nav>
+        <ul>
+          <li><a href="otp.html">OTP</a></li>
+          <li><a href="#aboutMe">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
     <h1>Dynamic Hill Cipher Encryption</h1>
 
     <h3>Enter Matrix Size:</h3>
