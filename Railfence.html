@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rail Fence Cipher</title>
+    <link rel="stylesheet" href="nav.css"> <!-- Link to external CSS -->
+    <style>body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #e9ecef;
+        color: #343a40;
+        margin: 0;
+        padding: 20px;
+    }
+    
+    h1 {
+        color: #007bff;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+    
+    .container {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    form {
+        margin-bottom: 20px;
+    }
+    
+    label {
+        display: block;
+        margin-top: 10px;
+    }
+    
+    textarea {
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        width: 100%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        resize: none; /* Prevents resizing */
+        transition: border-color 0.2s;
+    }
+    
+    textarea:focus {
+        border-color: #80bdff;
+        outline: none;
+    }
+    
+    input[type="number"] {
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        width: 100%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: border-color 0.2s;
+    }
+    
+    input[type="number"]:focus {
+        border-color: #80bdff;
+        outline: none;
+    }
+    
+    button {
+        background-color: #007bff;
+        color: white;
+        cursor: pointer;
+        font-weight: bold;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        width: 100%; /* Full width button */
+        transition: background-color 0.2s;
+    }
+    
+    button:hover {
+        background-color: #0056b3;
+    }
+    
+    .output {
+        background-color: #fff;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        padding: 15px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+    }
+    
+    .ciphertext {
+        font-weight: bold;
+        color: green;
+        margin-top: 10px;
+    }
+    
+    .rail {
+        font-family: monospace;
+        white-space: pre;
+        margin-bottom: 5px;
+    }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+          <li><a href="index.html">Hill Cipher</a></li>
+          <li><a href="otp.html">OTP</a></li>
+          <li><a href="Playfair.html">Play Fair</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1>Rail Fence Cipher</h1>
+        <form id="cipherForm">
+            <label for="plaintext">Enter the plaintext:</label><br>
+            <textarea id="plaintext" required></textarea><br>
+            <label for="rails">Enter the number of rails:</label><br>
+            <input type="number" id="rails" min="2" required><br>
+            <button type="submit">Encrypt</button>
+        </form>
+
+        <div id="result" style="display: none;">
+            <h2>Result:</h2>
+            <div class="ciphertext" id="ciphertext"></div>
+            <h3>Rail Fence Structure:</h3>
+            <div id="fenceContainer"></div>
+        </div>
+    </div>
+
+    <script src="Railfence.js"></script>
+</body>
+</html>
