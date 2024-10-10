@@ -81,7 +81,11 @@ function multiplyMatrixVector(keyMatrix, plaintextVector, partIndex) {
 function runHillCipher() {
     const matrixSize = parseInt(document.getElementById("matrix-size").value);
     const keyMatrix = getKeyMatrix(matrixSize);
+    
+    // Get the plaintext input and remove spaces
     let plaintext = document.getElementById("plaintext").value.toUpperCase();
+    plaintext = plaintext.replace(/\s+/g, ''); // Remove spaces
+
     plaintext = padPlaintext(plaintext, matrixSize);
 
     const parts = divideString(plaintext, matrixSize);

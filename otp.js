@@ -50,8 +50,9 @@ function otpEncrypt(plaintext, key) {
 document.getElementById('cipherForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
-    const plaintext = document.getElementById('plaintext').value.toLowerCase();
-    const key = document.getElementById('key').value.toLowerCase();
+    // Get plaintext and remove spaces
+    const plaintext = document.getElementById('plaintext').value.toLowerCase().replace(/\s+/g, ''); // Remove spaces
+    const key = document.getElementById('key').value.toLowerCase().replace(/\s+/g, ''); // Remove spaces
     const result = otpEncrypt(plaintext, key);
 
     let outputHtml = `
