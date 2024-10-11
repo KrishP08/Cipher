@@ -104,7 +104,7 @@
         </ul>
     </nav>
 
-    <h1>Hill Cipher Encryption</h1>
+    <h1>Hill Cipher</h1>
 
     <h3>Enter Matrix Size:</h3>
     <input type="number" id="matrix-size" value="3" min="2" max="10" onchange="generateMatrixInputs()">
@@ -114,8 +114,12 @@
 
     <h3>Enter Plaintext (auto-padded):</h3>
     <input type="text" id="plaintext" placeholder="Enter plaintext" style="width: 300px;">
+    
+    <h3>Enter Ciphertext:</h3>
+    <input type="text" id="ciphertext" placeholder="Enter ciphertext" style="width: 300px;">
 
-    <button onclick="runHillCipher()">Encrypt</button>
+    <button onclick="runHillCipher('encrypt')">Encrypt</button>
+    <button onclick="runHillCipher('decrypt')">Decrypt</button>
 
     <h2>Output:</h2>
     <div class="output" id="output"></div>

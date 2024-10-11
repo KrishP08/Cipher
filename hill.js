@@ -53,7 +53,7 @@ function numbersToText(nums) {
 function multiplyMatrixVector(keyMatrix, plaintextVector, partIndex) {
     let result = [];
     let explanation = `<strong>Step 3 - Matrix Multiplication for Part ${partIndex + 1}:</strong><br>`;
-    explanation += `Matris = [ <br>`;
+    explanation += `Matrix = [ <br>`;
 
     let intermediateSums = [];
     let calcSteps = [];
@@ -78,43 +78,73 @@ function multiplyMatrixVector(keyMatrix, plaintextVector, partIndex) {
     return { result, explanation };
 }
 
-function runHillCipher() {
+function inverseMatrix(matrix) {
+    // Implement your matrix inversion logic here
+    // Placeholder for inverse logic
+    return matrix; // Return the matrix as-is for now
+}
+
+function runHillCipher(mode) {
     const matrixSize = parseInt(document.getElementById("matrix-size").value);
     const keyMatrix = getKeyMatrix(matrixSize);
-    
-    // Get the plaintext input and remove spaces
-    let plaintext = document.getElementById("plaintext").value.toUpperCase();
-    plaintext = plaintext.replace(/\s+/g, ''); // Remove spaces
-
-    plaintext = padPlaintext(plaintext, matrixSize);
-
-    const parts = divideString(plaintext, matrixSize);
-    let ciphertext = '';
     let outputDiv = document.getElementById('output');
     outputDiv.innerHTML = '';  // Clear previous output
 
-    for (let i = 0; i < parts.length; i++) {
-        outputDiv.innerHTML += `<strong>Hill Cipher For Part ${i + 1}: ${parts[i]}</strong><br>`;
-        
-        let plaintextNums = textToNumbers(parts[i]);
-        outputDiv.innerHTML += `Step 1 - Plaintext to Numbers: [${plaintextNums}]<br>`;
+    if (mode === 'encrypt') {
+        // Encryption logic
+        let plaintext = document.getElementById("plaintext").value.toUpperCase().replace(/\s+/g, '');
+        plaintext = padPlaintext(plaintext, matrixSize);
+        const parts = divideString(plaintext, matrixSize);
+        let ciphertext = '';
 
-        let plaintextVector = plaintextNums.map(num => [num]);
-        outputDiv.innerHTML += `Step 2 - Reshaped Plaintext Matrix:<br>`;
-        outputDiv.innerHTML += `[[${plaintextVector.join('],<br> [')}]]<br><br>`;
+        for (let i = 0; i < parts.length; i++) {
+            outputDiv.innerHTML += `<strong>Hill Cipher For Part ${i + 1}: ${parts[i]}</strong><br>`;
+            
+            let plaintextNums = textToNumbers(parts[i]);
+            outputDiv.innerHTML += `Step 1 - Plaintext to Numbers: [${plaintextNums}]<br>`;
 
-        let { result, explanation } = multiplyMatrixVector(keyMatrix, plaintextNums, i);
-        outputDiv.innerHTML += explanation;
+            let plaintextVector = plaintextNums.map(num => [num]);
+            outputDiv.innerHTML += `Step 2 - Reshaped Plaintext Matrix:<br>`;
+            outputDiv.innerHTML += `[[${plaintextVector.join('],<br> [')}]]<br><br>`;
 
-        let cipherVector = result.map(num => num % 26);
-        outputDiv.innerHTML += `Step 4 - Matrix After Modulo 26:<br>`;
-        outputDiv.innerHTML += `[[${cipherVector.join('],<br> [')}]]<br><br>`;
+            let { result, explanation } = multiplyMatrixVector(keyMatrix, plaintextNums, i);
+            outputDiv.innerHTML += explanation;
 
-        let cipherPart = numbersToText(cipherVector);
-        outputDiv.innerHTML += `Step 5 - Ciphertext: ${cipherPart}<br><br>`;
-        
-        ciphertext += cipherPart;
+            let cipherVector = result.map(num => num % 26);
+            outputDiv.innerHTML += `Step 4 - Matrix After Modulo 26:<br>`;
+            outputDiv.innerHTML += `[[${cipherVector.join('],<br> [')}]]<br><br>`;
+
+            let cipherPart = numbersToText(cipherVector);
+            outputDiv.innerHTML += `Step 5 - Ciphertext: ${cipherPart}<br><br>`;
+            
+            ciphertext += cipherPart;
+        }
+
+        outputDiv.innerHTML += `<strong>Final Ciphertext: ${ciphertext}</strong>`;
+    } else if (mode === 'decrypt') {
+        // Decryption logic
+        let ciphertext = document.getElementById("ciphertext").value.toUpperCase().replace(/\s+/g, '');
+        const inverseKeyMatrix = inverseMatrix(keyMatrix);  // Calculate inverse key matrix
+        const parts = divideString(ciphertext, matrixSize);
+        let decryptedText = '';
+
+        for (let i = 0; i < parts.length; i++) {
+            outputDiv.innerHTML += `<strong>Decryption For Part ${i + 1}: ${parts[i]}</strong><br>`;
+            let cipherNums = textToNumbers(parts[i]);
+            outputDiv.innerHTML += `Step 1 - Ciphertext to Numbers: [${cipherNums}]<br>`;
+
+            let { result, explanation } = multiplyMatrixVector(inverseKeyMatrix, cipherNums, i);
+            outputDiv.innerHTML += explanation;
+
+            let decryptedVector = result.map(num => num % 26);
+            outputDiv.innerHTML += `Step 4 - Matrix After Modulo 26:<br>`;
+            outputDiv.innerHTML += `[[${decryptedVector.join('],<br> [')}]]<br><br>`;
+
+            let decryptedPart = numbersToText(decryptedVector);
+            outputDiv.innerHTML += `Step 5 - Decrypted Text: ${decryptedPart}<br><br>`;
+            decryptedText += decryptedPart;
+        }
+
+        outputDiv.innerHTML += `<strong>Final Decrypted Text: ${decryptedText}</strong>`;
     }
-
-    outputDiv.innerHTML += `<strong>Final Ciphertext: ${ciphertext}</strong>`;
 }
