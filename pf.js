@@ -131,3 +131,14 @@ document.getElementById('cipherForm').addEventListener('submit', function(event)
     document.getElementById('ciphertext').textContent = ciphertext;
     document.getElementById('resultBox').style.display = 'block';
 });
+/*
+const menuBtn = document.querySelector('.menu-btn');
+const navMenu = document.querySelector('nav ul');
+
+menuBtn.addEventListener('click', function() {
+    navMenu.classList.toggle('active');
+});
+*/
+document.querySelector('.menu-btn').addEventListener('click', function() {
+    document.querySelector('.sidebar').classList.toggle('open');
+});

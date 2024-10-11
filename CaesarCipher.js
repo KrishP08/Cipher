@@ -87,3 +87,7 @@ function toggleCollapse() {
     const collapseContent = document.getElementById("collapseContent");
     collapseContent.style.display = (collapseContent.style.display === "block") ? "none" : "block";
 }
+
+document.querySelector('.menu-btn').addEventListener('click', function() {
+    document.querySelector('.sidebar').classList.toggle('open');
+});

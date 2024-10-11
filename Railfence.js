@@ -53,3 +53,14 @@ document.getElementById('cipherForm').addEventListener('submit', function(event)
     });
     document.getElementById('result').style.display = 'block'; // Show the result section
 });
+/*
+const menuBtn = document.querySelector('.menu-btn');
+const navMenu = document.querySelector('nav ul');
+
+menuBtn.addEventListener('click', function() {
+    navMenu.classList.toggle('active');
+});
+*/
+document.querySelector('.menu-btn').addEventListener('click', function() {
+    document.querySelector('.sidebar').classList.toggle('open');
+});

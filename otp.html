@@ -99,14 +99,26 @@
     <link rel="stylesheet" href="nav.css">
 </head>
 <body>
-    <nav class="navbar">
-        <ul>
-          <li><a href="index.html">Hill Cipher</a></li>
-          <li><a href="Playfair.html">Play Fair</a></li>
-          <li><a href="Railfence.html">Rail Fence</a></li>          
-          <li><a href="CaesarCipher.html">Caesar Cipher</a></li>
-        </ul>
-    </nav>
+        <nav>
+            <button class="menu-btn">&#9776;</button> <!-- Hamburger button -->
+            <ul>
+                <li><a href="index.html">Hill Cipher</a></li>
+                <li><a href="Playfair.html">Playfair</a></li>
+                <li><a href="Railfence.html">Rail Fence</a></li>
+                <li><a href="CaesarCipher.html">Caesar Cipher</a></li>
+            </ul>
+        </nav>
+    
+        <!-- Sidebar for mobile view -->
+        <div class="sidebar">
+            <ul>
+                <li><a href="index.html">Hill Cipher</a></li>
+                <li><a href="Playfair.html">Playfair</a></li>
+                <li><a href="Railfence.html">Rail Fence</a></li>
+                <li><a href="CaesarCipher.html">Caesar Cipher</a></li>
+            </ul>
+        </div>
+    
     <div class="container">
         <h1>One-Time Pad Cipher</h1>
         <form id="cipherForm">
@@ -127,6 +139,7 @@
     </div>
 
     <script src="otp.js"></script>
+
 
 </body>
 </html>

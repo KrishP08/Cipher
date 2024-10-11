@@ -96,14 +96,24 @@
 </head>
 <body>
     <nav>
+        <button class="menu-btn">&#9776;</button> <!-- Hamburger button -->
         <ul>
-          <li><a href="otp.html">OTP</a></li>
-          <li><a href="Playfair.html">Play fair</a></li>
-          <li><a href="Railfence.html">Rail Fence</a></li>
-          <li><a href="CaesarCipher.html">Caesar Cipher</a></li>
-        </ul>
+            <li><a href="otp.html">OTP</a></li>
+            <li><a href="Playfair.html">Play fair</a></li>
+            <li><a href="Railfence.html">Rail Fence</a></li>
+            <li><a href="CaesarCipher.html">Caesar Cipher</a></li>
+          </ul>
     </nav>
 
+    <!-- Sidebar for mobile view -->
+    <div class="sidebar">
+        <ul>
+            <li><a href="otp.html">OTP</a></li>
+            <li><a href="Playfair.html">Play fair</a></li>
+            <li><a href="Railfence.html">Rail Fence</a></li>
+            <li><a href="CaesarCipher.html">Caesar Cipher</a></li>
+        </ul>
+    </div>
     <h1>Hill Cipher</h1>
 
     <h3>Enter Matrix Size:</h3>
@@ -124,5 +134,6 @@
     <h2>Output:</h2>
     <div class="output" id="output"></div>
     <script src="hill.js"></script>
+
 </body>
 </html>

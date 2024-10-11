@@ -148,3 +148,14 @@ function runHillCipher(mode) {
         outputDiv.innerHTML += `<strong>Final Decrypted Text: ${decryptedText}</strong>`;
     }
 }
+/*
+const menuBtn = document.querySelector('.menu-btn');
+const navMenu = document.querySelector('nav ul');
+
+menuBtn.addEventListener('click', function() {
+    navMenu.classList.toggle('active');
+});
+*/
+document.querySelector('.menu-btn').addEventListener('click', function() {
+    document.querySelector('.sidebar').classList.toggle('open');
+});
