@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caesar Cipher Encryption & Decryption</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eef2f3; /* Light background for better contrast */
+            color: #333; /* Darker text for readability */
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff; /* White background for the container */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        }
+
+        h1 {
+            text-align: center;
+            color: #4A90E2; /* Soft blue color for the title */
+        }
+
+        label {
+            font-weight: bold; /* Make labels bold */
+            margin-top: 10px; /* Space above labels */
+        }
+
+        input[type="text"], input[type="number"] {
+            width: 100%; /* Full width for input fields */
+            padding: 10px; /* Padding for better touch targets */
+            margin: 5px 0 15px; /* Margin for spacing */
+            border: 1px solid #ccc; /* Light border */
+            border-radius: 4px; /* Slight rounding */
+            box-sizing: border-box; /* Include padding in width calculation */
+        }
+
+        button {
+            background-color: #4A90E2; /* Button background color */
+            color: white; /* Text color */
+            padding: 10px 15px; /* Padding for the button */
+            border: none; /* Remove border */
+            border-radius: 4px; /* Rounded corners */
+            cursor: pointer; /* Pointer cursor on hover */
+            font-size: 16px; /* Slightly larger font size */
+            width: 48%;
+            margin: 5px 1%;
+        }
+
+        button.decrypt-btn {
+            background-color: #f44336; /* Red for Decrypt */
+        }
+
+        button:hover {
+            background-color: #357ABD; /* Darker blue on hover */
+        }
+
+        button.decrypt-btn:hover {
+            background-color: #e53935;
+        }
+
+        .result-section {
+            background-color: #f1f1f1; /* Light grey background for result box */
+            border: 1px solid #ccc; /* Border for result box */
+            border-radius: 4px; /* Rounded corners */
+            padding: 15px; /* Padding inside the result box */
+            margin-top: 20px; /* Space above result box */
+            text-align: center;
+        }
+
+        .result-section h2 {
+            color: #4A90E2;
+            margin-top: 0;
+        }
+
+        .collapse-section {
+            margin-top: 20px;
+        }
+
+        .tables-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .table-wrapper {
+            width: 48%;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+            background-color: #f9f9f9; /* Light grey background for the table */
+        }
+
+        .collapse-content {
+            display: none;
+        }
+
+        .expand-btn {
+            background-color: #4A90E2;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            border-radius: 4px;
+        }
+
+        .expand-btn:hover {
+            background-color: #357ABD;
+        }
+    </style>
+    <link rel="stylesheet" href="nav.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Caesar Cipher</h1>
+    <nav class="navbar">
+        <ul>
+          <li><a href="index.html">Hill Cipher</a></li>
+          <li><a href="otp.html">OTP</a></li>
+          <li><a href="Playfair.html">Play fair</a></li>
+          <li><a href="Railfence.html">Rail Fence</a></li>
+        </ul>
+    </nav>
+    <!-- Form for Input -->
+    <form id="cipherForm">
+        <label for="message">Message:</label>
+        <input type="text" id="message" name="message" placeholder="Enter message..." required>
+
+        <label for="shift">Shift Value:</label>
+        <input type="number" id="shift" name="shift" placeholder="Enter shift value..." required>
+
+        <!-- Two Buttons for Encryption and Decryption -->
+        <div style="text-align: center;">
+            <button type="button" onclick="performEncrypt()">Encrypt</button>
+            <button type="button" class="decrypt-btn" onclick="performDecrypt()">Decrypt</button>
+        </div>
+    </form>
+
+    <!-- Result Section -->
+    <div id="resultBox" class="result-section" style="display: none;">
+        <h2>Result:</h2>
+        <p id="result"></p>
+    </div>
+
+    <!-- Collapsible Section -->
+    <div class="collapse-section">
+        <button class="expand-btn" onclick="toggleCollapse()">Show/Hide Alphabet Tables</button>
+        <div class="collapse-content" id="collapseContent">
+            <div class="tables-container">
+                <!-- Plain Alphabet Table -->
+                <div class="table-wrapper">
+                    <h3>Alphabet (A-Z)</h3>
+                    <table id="alphabetTable">
+                        <thead>
+                            <tr>
+                                <th>Alphabet</th>
+                                <th>Position</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Shifted Alphabet Table -->
+                <div class="table-wrapper">
+                    <h3>Shifted Alphabet</h3>
+                    <table id="shiftedTable">
+                        <thead>
+                            <tr>
+                                <th>Shifted Alphabet</th>
+                                <th>Position</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="CaesarCipher.js"></script>
+
+</body>
+</html>
