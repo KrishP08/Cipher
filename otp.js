@@ -47,32 +47,96 @@ function otpEncrypt(plaintext, key) {
     };
 }
 
+// Decryption function
+function otpDecrypt(ciphertext, key) {
+    key = extendKey(ciphertext, key);
+    const cipherNums = Array.from(ciphertext).map(letterToNum);
+    const keyNums = Array.from(key).map(letterToNum);
+    const initialDifferences = cipherNums.map((c, i) => c - keyNums[i]);
+    const plaintextNums = [];
+    const calculationSteps = [];
+
+    for (let i = 0; i < cipherNums.length; i++) {
+        let d = initialDifferences[i];
+        if (d < 0) {
+            plaintextNums.push(d + 26);
+            calculationSteps.push(`Difference: ${d} < 0, so ${d} + 26 = ${d + 26}`);
+        } else {
+            plaintextNums.push(d);
+            calculationSteps.push(`Difference: ${d}`);
+        }
+    }
+
+    const plaintext = plaintextNums.map(numToLetter).join('');
+
+    return {
+        ciphertext: ciphertext.split('').join('   '),
+        cipher_nums: cipherNums.map(n => n.toString().padStart(2)).join('   '),
+        key: key.split('').join('   '),
+        key_nums: keyNums.map(n => n.toString().padStart(2)).join('   '),
+        initial_differences: initialDifferences.map(d => d.toString().padStart(2)).join('   '),
+        plaintext_nums: plaintextNums.map(n => n.toString().padStart(2)).join('   '),
+        plaintext: plaintext,
+        steps: calculationSteps
+    };
+}
+
 document.getElementById('cipherForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
-    // Get plaintext and remove spaces
     const plaintext = document.getElementById('plaintext').value.toLowerCase().replace(/\s+/g, ''); // Remove spaces
     const key = document.getElementById('key').value.toLowerCase().replace(/\s+/g, ''); // Remove spaces
-    const result = otpEncrypt(plaintext, key);
+    const mode = document.querySelector('input[name="mode"]:checked').value; // Get encryption or decryption mode
 
-    let outputHtml = `
-        <p>${result.plaintext}   #plaintext</p>
-        <p>${result.plaintext_nums}</p>
-        <p>+  </p>
-        <p>${result.key}   #key</p>
-        <p>${result.key_nums}</p>
-        <p>-----------------------------------</p>
-        <p>${result.initial_sums}</p>
-        <p>${result.cipher_nums}  #If you want happen here check detailed Steps</p>
-        <p>cp-${result.cipher_text}</p>
-        <button class="collapsible">Show Detailed Steps</button>
-        <div class="content">
-            <ul>
-                ${result.steps.map(step => `<li>${step}</li>`).join('')}
-            </ul>
-        </div>
-    `;
+    let result;
+    if (mode === 'encrypt') {
+        result = otpEncrypt(plaintext, key);
 
+        let outputHtml = `
+            <p>${result.plaintext}   #plaintext</p>
+            <p>${result.plaintext_nums}</p>
+            <p>+  </p>
+            <p>${result.key}   #key</p>
+            <p>${result.key_nums}</p>
+            <p>-----------------------------------</p>
+            <p>${result.initial_sums}</p>
+            <p>${result.cipher_nums}  #If you want happen here check detailed Steps</p>
+            <p>cp-${result.cipher_text}</p>
+            <button class="collapsible">Show Detailed Steps</button>
+            <div class="content">
+                <ul>
+                    ${result.steps.map(step => `<li>${step}</li>`).join('')}
+                </ul>
+            </div>
+        `;
+        
+        displayOutput(outputHtml);
+    } else if (mode === 'decrypt') {
+        result = otpDecrypt(plaintext, key);
+
+        let outputHtml = `
+            <p>${result.ciphertext}   #ciphertext</p>
+            <p>${result.cipher_nums}</p>
+            <p>-  </p>
+            <p>${result.key}   #key</p>
+            <p>${result.key_nums}</p>
+            <p>-----------------------------------</p>
+            <p>${result.initial_differences}</p>
+            <p>${result.plaintext_nums}  #If you want happen here check detailed Steps</p>
+            <p>pt-${result.plaintext}</p>
+            <button class="collapsible">Show Detailed Steps</button>
+            <div class="content">
+                <ul>
+                    ${result.steps.map(step => `<li>${step}</li>`).join('')}
+                </ul>
+            </div>
+        `;
+        
+        displayOutput(outputHtml);
+    }
+});
+
+function displayOutput(outputHtml) {
     const outputDiv = document.getElementById('output');
     outputDiv.innerHTML = outputHtml;
     outputDiv.style.display = 'block';
@@ -86,4 +150,4 @@ document.getElementById('cipherForm').addEventListener('submit', function(event)
             this.textContent = (content.style.display === "block") ? "Hide Detailed Steps" : "Show Detailed Steps";
         });
     }
-});
+}

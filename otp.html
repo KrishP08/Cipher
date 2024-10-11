@@ -20,7 +20,6 @@
             text-align: center;
         }
         
-     
         .container {
             max-width: 600px;
             margin: 20px auto;
@@ -87,8 +86,6 @@
             border-radius: 5px;
         }
         
-
-        
         .content {
             padding: 0 18px;
             display: none;
@@ -99,34 +96,29 @@
         }
 
     </style>
-    <link rel="stylesheet" href="nav.css">
 </head>
 <body>
-
-    <nav class="navbar">
-        <ul>
-          <li><a href="index.html">Hill Cipher</a></li>
-          <li><a href="Playfair.html">Play fair</a></li>
-          <li><a href="Railfence.html">Rail Fence</a></li>
-          <li><a href="CaesarCipher.html">Caesar Cipher</a></li>
-        </ul>
-    </nav>
 
     <div class="container">
         <h1>One-Time Pad Cipher</h1>
         <form id="cipherForm">
-            <label for="plaintext">Plaintext:</label>
-            <input type="text" id="plaintext" placeholder="Enter the plaintext" required>
+            <label for="plaintext">Text:</label>
+            <input type="text" id="plaintext" placeholder="Enter the plaintext or ciphertext" required>
 
             <label for="key">Key:</label>
             <input type="text" id="key" placeholder="Enter the key" required>
 
-            <button type="submit">Encrypt</button>
+            <label for="mode">Mode:</label>
+            <input type="radio" id="encrypt" name="mode" value="encrypt" checked> Encrypt
+            <input type="radio" id="decrypt" name="mode" value="decrypt"> Decrypt
+
+            <button type="submit">Submit</button>
         </form>
 
         <div id="output" class="output" style="display:none;"></div>
     </div>
 
     <script src="otp.js"></script>
+
 </body>
 </html>
