@@ -1,15 +1,22 @@
+/* Reset margins and padding for the entire page */
+body, html {
+    margin: 0;
+    padding: 3;
+    box-sizing: border-box; /* Ensure padding/margin don't affect element width */
+}
+
 /* Navigation Bar Styles */
 nav {
     background-color: #343a40;
     padding: 10px; /* Adjusted padding */
     border-radius: 8px;
-    margin: 0;
     position: fixed; /* Fixed position */
     top: 0;
-    width: 100%; /* Full width */
+    left: 0; /* Make sure it's aligned with the left side */
+    width: 100%; /* Full width to stretch across the screen */
     z-index: 1000; /* Ensure it stays on top */
     display: flex; /* Flexbox layout */
-    justify-content: center; /* Horizontally center the nav */
+    justify-content: center; /* Horizontally center the nav content */
     align-items: center; /* Vertically center the nav content */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
@@ -18,11 +25,12 @@ nav {
 nav ul {
     list-style-type: none; /* Remove bullet points */
     padding: 0; /* Remove padding */
+    margin: 0; /* Remove default margin */
     display: flex; /* Flexbox for horizontal layout */
     justify-content: center; /* Center the links horizontally */
-    margin: 0; /* Ensure no extra margins are pushing it */
 }
 
+/* Individual list items and links */
 nav li {
     margin-right: 10px; /* Space between links */
 }
