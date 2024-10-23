@@ -159,3 +159,26 @@ menuBtn.addEventListener('click', function() {
 document.querySelector('.menu-btn').addEventListener('click', function() {
     document.querySelector('.sidebar').classList.toggle('open');
 });
+function generateRandomKeyMatrix() {
+    const matrixSize = parseInt(document.getElementById("matrix-size").value);
+    
+    // Generate random key values and fill them into the matrix
+    for (let row = 0; row < matrixSize; row++) {
+        for (let col = 0; col < matrixSize; col++) {
+            let randomValue = Math.floor(Math.random() * 26); // Random number between 0 and 25
+            document.getElementById(`key-${row}-${col}`).value = randomValue;
+        }
+    }
+}
+function generateRandomPlaintext() {
+    const matrixSize = parseInt(document.getElementById("matrix-size").value);
+    const randomLength = matrixSize * Math.floor(Math.random() * 5 + 1); // Random length multiple of matrix size
+    let randomPlaintext = '';
+
+    for (let i = 0; i < randomLength; i++) {
+        const randomChar = String.fromCharCode(Math.floor(Math.random() * 26) + 'A'.charCodeAt(0)); // Random letter from A-Z
+        randomPlaintext += randomChar;
+    }
+
+    document.getElementById("plaintext").value = randomPlaintext; // Set the generated random plaintext
+}

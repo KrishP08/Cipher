@@ -28,8 +28,9 @@ function findPosition(matrix, char) {
             }
         }
     }
-    return null;
+    return null; // In case the character is not found
 }
+
 
 function processText(plaintext) {
     let processedText = [];
@@ -73,7 +74,7 @@ function printMatrix(matrix, highlightPositions = []) {
 function encryptDigraph(digraph, matrix) {
     const [row1, col1] = findPosition(matrix, digraph[0]);
     const [row2, col2] = findPosition(matrix, digraph[1]);
-    
+
     let result = `\nProcessing digraph: ${digraph}\n`;
     result += `Positions: ${digraph[0]} -> (${row1},${col1}), ${digraph[1]} -> (${row2},${col2})\n`;
 
@@ -94,15 +95,40 @@ function encryptDigraph(digraph, matrix) {
         encryptedDigraph = matrix[row1][col2] + matrix[row2][col1];
         result += `${digraph[0]} -> ${matrix[row1][col2]}, ${digraph[1]} -> ${matrix[row2][col1]}\n`;
     }
-    
-    result += `cp:-${encryptedDigraph.toLowerCase()}\n`; // Add the cp output
+
     return encryptedDigraph + result;
 }
+document.getElementById('cipherForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const operation = document.getElementById('operation').value;
+    const key = document.getElementById('key').value;
+    const text = document.getElementById('plaintext').value;
+
+    if (operation === 'encrypt') {
+        const { result: encResult, ciphertext } = playfairEncrypt(text, key);
+        document.getElementById('result').textContent = encResult;
+        document.getElementById('ciphertext').textContent = ciphertext;
+        document.getElementById('resultBox').style.display = 'block';
+        document.getElementById('decryptionResult').style.display = 'none'; // Hide decryption results
+    } else if (operation === 'decrypt') {
+        const { result: decResult, plaintext } = playfairDecrypt(text, key);
+        document.getElementById('decryptionResultContent').textContent = decResult;
+        document.getElementById('decryptionResult').style.display = 'block'; // Show decryption results
+        document.getElementById('resultBox').style.display = 'none'; // Hide encryption results
+    }
+});
+
+
+document.getElementById('generateKey').addEventListener('click', function() {
+    const randomKey = autoGenerateKey();
+    document.getElementById('key').value = randomKey;
+});
 
 function playfairEncrypt(plaintext, key) {
     const matrix = generateKeyMatrix(key);
     let result = `Plaintext: ${plaintext}\nKey: ${key}\n\nKey Matrix:\n${printMatrix(matrix)}`;
-    
+
     plaintext = plaintext.toLowerCase().replace(/j/g, 'i').replace(/ /g, "");
     const digraphs = processText(plaintext);
     result += `Processed Digraphs: ${JSON.stringify(digraphs)}\n`;
@@ -111,34 +137,73 @@ function playfairEncrypt(plaintext, key) {
     digraphs.forEach(digraph => {
         const encryptedDigraphResult = encryptDigraph(digraph, matrix);
         result += encryptedDigraphResult;
-        ciphertext.push(encryptedDigraphResult.slice(0, 2)); // Get only the encrypted digraph
+        ciphertext.push(encryptedDigraphResult.slice(0, 2));
     });
-    
+
     const finalCipher = ciphertext.join('').toUpperCase();
     result += `\nCiphertext: ${finalCipher}\n`;
-    result += `Ciphertext:\n${finalCipher}\n`;
     return { result, ciphertext: finalCipher };
 }
 
-document.getElementById('cipherForm').addEventListener('submit', function(event) {
-    event.preventDefault();
+function decryptDigraph(digraph, matrix) {
+    const [row1, col1] = findPosition(matrix, digraph[0]);
+    const [row2, col2] = findPosition(matrix, digraph[1]);
+
+    let result = `\nProcessing digraph: ${digraph}\n`;
+    result += `Positions: ${digraph[0]} -> (${row1},${col1}), ${digraph[1]} -> (${row2},${col2})\n`;
+
+    let decryptedDigraph = '';
+    if (row1 === row2) {
+        // Same row
+        result += "Same row -> moving left\n";
+        decryptedDigraph = matrix[row1][(col1 + 4) % 5] + matrix[row2][(col2 + 4) % 5]; // Move left
+        result += `${digraph[0]} -> ${matrix[row1][(col1 + 4) % 5]}, ${digraph[1]} -> ${matrix[row2][(col2 + 4) % 5]}\n`;
+    } else if (col1 === col2) {
+        // Same column
+        result += "Same column -> moving up\n";
+        decryptedDigraph = matrix[(row1 + 4) % 5][col1] + matrix[(row2 + 4) % 5][col2]; // Move up
+        result += `${digraph[0]} -> ${matrix[(row1 + 4) % 5][col1]}, ${digraph[1]} -> ${matrix[(row2 + 4) % 5][col2]}\n`;
+    } else {
+        // Rectangle swap
+        result += "Rectangle -> swapping corners\n";
+        decryptedDigraph = matrix[row1][col2] + matrix[row2][col1];
+        result += `${digraph[0]} -> ${matrix[row1][col2]}, ${digraph[1]} -> ${matrix[row2][col1]}\n`;
+    }
     
-    const key = document.getElementById('key').value;
-    const plaintext = document.getElementById('plaintext').value;
+    return { result, decrypted: decryptedDigraph };
+}
 
-    const { result, ciphertext } = playfairEncrypt(plaintext, key);
-    document.getElementById('result').textContent = result;
-    document.getElementById('ciphertext').textContent = ciphertext;
-    document.getElementById('resultBox').style.display = 'block';
-});
-/*
-const menuBtn = document.querySelector('.menu-btn');
-const navMenu = document.querySelector('nav ul');
+function playfairDecrypt(ciphertext, key) {
+    const matrix = generateKeyMatrix(key);
+    let result = `Ciphertext: ${ciphertext}\nKey: ${key}\n\nKey Matrix:\n${printMatrix(matrix)}`;
 
-menuBtn.addEventListener('click', function() {
-    navMenu.classList.toggle('active');
-});
-*/
-document.querySelector('.menu-btn').addEventListener('click', function() {
-    document.querySelector('.sidebar').classList.toggle('open');
-});
+    // Process the ciphertext into digraphs
+    const digraphs = processText(ciphertext.toLowerCase().replace(/j/g, 'i'));
+    result += `Processed Digraphs: ${JSON.stringify(digraphs)}\n`;
+
+    const decryptedText = [];
+    digraphs.forEach(digraph => {
+        const { result: digraphResult, decrypted } = decryptDigraph(digraph, matrix);
+        result += digraphResult; // Append detailed processing of each digraph
+        decryptedText.push(decrypted); // Collect the decrypted characters
+    });
+
+    const finalPlaintext = decryptedText.join('');
+    result += `\nPlaintext: ${finalPlaintext}\n`;
+    return { result, plaintext: finalPlaintext };
+}
+
+
+// Auto-generate random key with a random size between 8 and 17 characters
+function autoGenerateKey() {
+    const alphabet = "abcdefghiklmnopqrstuvwxyz";
+    const randomSize = Math.floor(Math.random() * 10) + 8; // 8 to 17 characters
+
+    let key = '';
+    for (let i = 0; i < randomSize; i++) {
+        key += alphabet[Math.floor(Math.random() * alphabet.length)];
+    }
+
+    return key.toUpperCase(); // Convert to uppercase
+}
+

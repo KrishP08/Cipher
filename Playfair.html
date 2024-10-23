@@ -7,8 +7,8 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #eef2f3; /* Light background for better contrast */
-            color: #333; /* Darker text for readability */
+            background-color: #eef2f3; 
+            color: #333;
             margin: 0;
             padding: 20px;
         }
@@ -17,83 +17,72 @@
             max-width: 600px;
             margin: auto;
             padding: 20px;
-            background-color: #fff; /* White background for the container */
-            border-radius: 8px; /* Rounded corners */
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
         
         h1 {
             text-align: center;
-            color: #4A90E2; /* Soft blue color for the title */
+            color: #4A90E2;
         }
         
         label {
-            font-weight: bold; /* Make labels bold */
-            margin-top: 10px; /* Space above labels */
+            font-weight: bold;
+            margin-top: 10px;
         }
         
         input[type="text"] {
-            width: 100%; /* Full width for input fields */
-            padding: 10px; /* Padding for better touch targets */
-            margin: 5px 0 15px; /* Margin for spacing */
-            border: 1px solid #ccc; /* Light border */
-            border-radius: 4px; /* Slight rounding */
-            box-sizing: border-box; /* Include padding in width calculation */
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
         }
         
         button {
-            background-color: #4A90E2; /* Button background color */
-            color: white; /* Text color */
-            padding: 10px 15px; /* Padding for the button */
-            border: none; /* Remove border */
-            border-radius: 4px; /* Rounded corners */
-            cursor: pointer; /* Pointer cursor on hover */
-            font-size: 16px; /* Slightly larger font size */
+            background-color: #4A90E2;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
         }
         
         button:hover {
-            background-color: #357ABD; /* Darker blue on hover */
+            background-color: #357ABD;
         }
         
-        .matrix {
-            font-family: monospace; /* Monospaced font for matrix display */
-            white-space: pre; /* Preserve whitespace */
-            background-color: #f9f9f9; /* Light grey background for the matrix */
+        .matrix, .ciphertext, .digraphs {
+            font-family: monospace;
+            white-space: pre;
+            background-color: #f9f9f9;
             padding: 10px;
-            border: 1px solid #ccc; /* Border around the matrix */
-            border-radius: 4px; /* Rounded corners */
-            display: inline-block; /* Allow inline block display */
-            overflow-x: auto; /* Allow horizontal scrolling if needed */
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            display: inline-block;
+            margin-top: 10px;
         }
         
         .result-box {
-            background-color: #f1f1f1; /* Light grey background for result box */
-            border: 1px solid #ccc; /* Border for result box */
-            border-radius: 4px; /* Rounded corners */
-            padding: 15px; /* Padding inside the result box */
-            margin-top: 20px; /* Space above result box */
+            background-color: #f1f1f1;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 15px;
+            margin-top: 20px;
         }
-        
-        .digraphs, .ciphertext {
-            font-family: monospace; /* Monospaced font for digraphs and ciphertext */
-            background-color: #fff; /* White background for better contrast */
-            padding: 5px; /* Padding around text */
-            border: 1px solid #ccc; /* Border around text */
-            border-radius: 4px; /* Slight rounding for aesthetics */
-            margin-top: 10px; /* Space above */
-        }
-        
+
         h2 {
-            color: #4A90E2; /* Soft blue color for section titles */
-            margin-top: 20px; /* Space above section titles */
+            color: #4A90E2;
         }
-        
     </style>
     <link rel="stylesheet" href="nav.css">
 </head>
 <body>
     <nav>
-        <button class="menu-btn">&#9776;</button> <!-- Hamburger button -->
+        <button class="menu-btn">&#9776;</button>
         <ul>
             <li><a href="index.html">Hill Cipher</a></li>
             <li><a href="otp.html">OTP</a></li>
@@ -114,25 +103,35 @@
     <div class="container">
         <h1>Playfair Cipher</h1>
         <form id="cipherForm">
-            <label for="key">Key:</label><br>
-            <input type="text" id="key" name="key" required><br><br>
+            <label for="operation">Select Operation:</label><br>
+            <select id="operation" name="operation" required>
+                <option value="encrypt">Encrypt</option>
+                <option value="decrypt">Decrypt</option>
+            </select><br><br>
 
-            <label for="plaintext">Plaintext:</label><br>
+            <label for="key">Key:</label><br>
+            <input type="text" id="key" name="key" required><br>
+            <button type="button" id="generateKey">Generate Random Key</button><br><br>
+
+            <label for="plaintext">Text:</label><br>
             <input type="text" id="plaintext" name="plaintext" required><br><br>
 
-            <button type="submit">Encrypt</button>
+            <button type="submit">Submit</button>
         </form>
-        
+
         <div id="resultBox" class="result-box" style="display: none;">
             <h2>Encryption Steps:</h2>
             <pre id="result"></pre>
-
             <h2>Ciphertext:</h2>
             <div class="ciphertext" id="ciphertext"></div>
+        </div>
+
+        <div id="decryptionResult" class="result-box" style="display: none;">
+            <h2>Decryption Steps:</h2>
+            <pre id="decryptionResultContent"></pre>
         </div>
     </div>
 
     <script src="pf.js"></script>
-
 </body>
 </html>

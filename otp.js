@@ -162,3 +162,18 @@ menuBtn.addEventListener('click', function() {
 document.querySelector('.menu-btn').addEventListener('click', function() {
     document.querySelector('.sidebar').classList.toggle('open');
 });
+function generateRandomKey() {
+    const plaintext = document.getElementById('plaintext').value.toLowerCase().replace(/\s+/g, ''); // Remove spaces from plaintext
+    if (!plaintext) {
+        alert('Please enter plaintext before generating a key.');
+        return;
+    }
+
+    let randomKey = '';
+    for (let i = 0; i < plaintext.length; i++) {
+        const randomChar = String.fromCharCode(Math.floor(Math.random() * 26) + 'a'.charCodeAt(0)); // Generate random lowercase letter
+        randomKey += randomChar;
+    }
+
+    document.getElementById('key').value = randomKey; // Set the generated key
+}

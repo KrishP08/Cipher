@@ -135,7 +135,7 @@ nav a.active {
     color: white; /* White color for the icon (the three lines) */
     font-size: 30px; /* Size of the hamburger icon */
     cursor: pointer; /* Pointer cursor */
-    padding: 10px; /* Add padding for touch area */
+    padding: 2px; /* Add padding for touch area */
     border-radius: 5px; /* Rounded corners */
     transition: background-color 0.3s ease; /* Smooth hover effect */
     position: absolute; /* Place it on the top */
