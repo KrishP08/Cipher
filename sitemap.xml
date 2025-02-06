@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://krishp08.github.io/Cipher/</loc>
+  <lastmod>2025-02-06T16:47:01+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://krishp08.github.io/Cipher/otp.html</loc>
+  <lastmod>2025-02-06T16:47:01+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://krishp08.github.io/Cipher/Playfair.html</loc>
+  <lastmod>2025-02-06T16:47:01+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://krishp08.github.io/Cipher/Railfence.html</loc>
+  <lastmod>2025-02-06T16:47:01+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://krishp08.github.io/Cipher/CaesarCipher.html</loc>
+  <lastmod>2025-02-06T16:47:01+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://krishp08.github.io/Cipher/index.html</loc>
+  <lastmod>2025-02-06T16:47:01+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+
+
+</urlset>
