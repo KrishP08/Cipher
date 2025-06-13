@@ -26,18 +26,16 @@ nav {
     font-size: 1.4em;
     color: var(--dark-text-primary);
     font-weight: bold;
-    /* margin-right: auto; /* Let flex space-between handle spacing */
+    margin-right: auto; /* Pushes other items to the right if needed, or rely on space-between */
 }
 
-/* Navigation links container */
+/* Centering the links inside the nav */
 nav ul {
     list-style-type: none;
     padding: 0;
-    margin: 0; /* Remove default margins */
+    margin: 0;
     display: flex;
     justify-content: center;
-    flex-grow: 1; /* Allows links to take up space and center, pushing switcher/menu to right */
-    /* margin-left: auto; /* Remove this to allow switcher to be to its right */
 }
 
 /* Individual list items and links */
@@ -61,45 +59,18 @@ nav a.active {
     background-color: var(--dark-accent-primary); /* Applied dark theme */
 }
 
-#theme-switcher-btn {
-    padding: 5px 10px; /* Smaller padding */
-    margin-left: 10px; /* Space from other nav items */
-    background-color: var(--dark-button-bg, #008055); /* From Matrix theme */
-    color: var(--dark-button-text, #0f0f0f); /* From Matrix theme */
-    border: 1px solid var(--dark-border-color, #2d2d2d);
-    border-radius: 4px; /* Slightly smaller radius */
-    cursor: pointer;
-    font-family: inherit; /* Inherit Fira Code for Matrix theme */
-    font-size: 0.85em; /* Smaller font size */
-    white-space: nowrap;
-    order: 2; /* Place after links, before menu button on mobile */
-}
-
-#theme-switcher-btn:hover {
-    background-color: var(--dark-button-hover-bg, #00995c); /* From Matrix theme */
-}
-
-
 /* Hamburger menu button (hidden on large screens) */
-/* This .menu-btn definition is more specific and should be used */
 .menu-btn {
-    display: none; /* Hidden by default */
-    background-color: var(--dark-bg-secondary); /* Applied dark theme */
-    border: none; /* Remove default border */
+    display: none;
+    background-color: transparent;
+    border: none;
     color: var(--dark-text-primary); /* Applied dark theme */
-    font-size: 24px; /* Adjusted size */
-    cursor: pointer; /* Pointer cursor */
-    padding: 5px 8px; /* Adjusted padding */
-    border-radius: 5px; /* Rounded corners */
-    transition: background-color 0.3s ease; /* Smooth hover effect */
-    margin-left: 10px; /* Space from theme switcher */
-    order: 3;
+    font-size: 30px;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    left: 10px;
 }
-
-.menu-btn:hover {
-    background-color: var(--dark-accent-hover); /* Applied dark theme */
-}
-
 
 /* Sidebar styles for mobile view */
 .sidebar {
@@ -111,32 +82,28 @@ nav a.active {
     height: 100%;
     background-color: var(--dark-bg-secondary); /* Applied dark theme */
     padding-top: 60px; /* To avoid overlap with the menu button */
-    z-index: 1000; /* Ensure sidebar is above content but can be below nav if nav z-index is higher */
+    z-index: 1000;
     transition: transform 0.3s ease; /* Slide-out effect */
     box-shadow: 2px 0 5px rgba(0,0,0,0.2);
 }
 
 /* Sidebar ul and links */
 .sidebar ul {
-    display: block; /* Changed from flex to block for vertical list */
-    list-style-type: none; /* Ensure list style is none */
-    padding: 0; /* Remove padding */
-    margin: 0; /* Remove margin */
-    /* flex-direction: column; /* Not needed for display: block */
-    /* align-items: start; /* Not needed for display: block */
-    /* padding-left: 20px; /* Re-add if specific indent needed */
+    display: block;
+    flex-direction: column;
+    align-items: start;
+    padding-left: 20px;
 }
 
 .sidebar li {
-    margin: 0; /* Remove default li margins if any */
+    margin: 10px 0;
 }
 
 .sidebar a {
     display: block;
-    padding: 15px 20px; /* Increased padding for better tap targets */
+    padding: 10px;
     color: var(--dark-text-primary); /* Applied dark theme */
     text-decoration: none;
-    transition: background-color 0.2s; /* Added transition */
 }
 
 .sidebar a:hover {
@@ -150,35 +117,24 @@ nav a.active {
 /* Responsive design for smaller screens */
 @media (max-width: 768px) {
     nav {
-        /* justify-content: space-between; already set */
-        padding: 10px 15px; /* Slightly reduce padding on mobile nav */
+        /* justify-content: space-between; already set, title on left, menu button on right */
     }
     .nav-cipher-title {
-        font-size: 1.1em; /* Slightly smaller on mobile */
-        margin-right: 0; /* Allow space-between to handle it */
-        flex-shrink: 0; /* Prevent title from shrinking too much */
+        font-size: 1.2em; /* Slightly smaller on mobile */
     }
-
-    nav ul { /* This is for desktop links, should be hidden */
+    /* Hide horizontal navbar, show hamburger menu */
+    nav ul {
         display: none;
-    }
-
-    #theme-switcher-btn {
-        font-size: 0.8em; /* Smaller on mobile */
-        padding: 4px 8px; /* Adjust padding for mobile */
-        margin-left: auto; /* Pushes it to the right of title */
-        order: 2; /* Before menu button */
     }
 
     .menu-btn {
         display: block; /* Show the menu button */
-        /* position: static; /* Already set above */
-        order: 3; /* After theme switcher */
+        position: static; /* Remove absolute positioning to let flexbox handle it */
+        order: 3; /* Ensure it's on the far right if title and links were grouped */
     }
 
     .sidebar {
-        display: block; /* Make sidebar visible (though off-screen initially) */
-        z-index: 1001; /* Ensure sidebar is above the main nav if nav is 1000 */
+        display: block; /* Make sidebar visible */
     }
 }
 
@@ -186,6 +142,57 @@ nav a.active {
 .sidebar.open {
     transform: translateX(0); /* Slide the sidebar in */
 }
+/* Style for the hamburger menu button */
+/* Style for the hamburger menu button */
+.menu-btn {
+    display: none; /* Hidden by default */
+    background-color: var(--dark-bg-secondary); /* Applied dark theme */
+    border: none; /* Remove default border */
+    color: var(--dark-text-primary); /* Applied dark theme */
+    font-size: 30px; /* Size of the hamburger icon */
+    cursor: pointer; /* Pointer cursor */
+    padding: 2px; /* Add padding for touch area */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+    position: absolute; /* Place it on the top */
+    top: 10px; /* Adjust top position */
+    right: 10px; /* Adjust right position if not using flex order */
+}
 
-/* Redundant/Conflicting .menu-btn styles removed for clarity, keeping one primary definition */
-/* Redundant nav ul @media query also consolidated/removed */
+.menu-btn:hover {
+    background-color: var(--dark-accent-hover); /* Applied dark theme */
+}
+
+/* Show the button on small screens */
+@media (max-width: 768px) {
+    .menu-btn {
+        display: block; /* Show the button on small screens */
+         /* position: static; /* Already set above */
+    }
+}
+
+/* Style for the menu (initially hidden) */
+nav ul {
+    display: flex; /* Default behavior */
+    flex-direction: row; /* Horizontal layout */
+    margin-left: auto; /* Pushes links to the right of the title */
+}
+
+@media (max-width: 768px) {
+    nav ul {
+        display: none; /* Hide the menu by default on small screens */
+        flex-direction: column; /* Vertical layout for small screens */
+        position: absolute; /* Position relative to the button */
+        top: 50px; /* Place below the button */
+        right: 0;
+        background-color: var(--dark-bg-secondary); /* Applied dark theme */
+        width: 200px; /* Menu width */
+        border-radius: 0 0 8px 8px; /* Rounded corners at the bottom */
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow */
+    }
+
+    /* Show the menu when active */
+    nav ul.active {
+        display: flex;
+    }
+}

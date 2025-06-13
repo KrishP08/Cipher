@@ -1,116 +1,90 @@
-// Matrix Animation Variables - keep them in a scope accessible by all functions here
-let matrixIntervalId = null;
-let matrixCanvas = null;
-let matrixCtx = null;
-let matrixWidth = 0;
-let matrixHeight = 0;
-let matrixChars = "アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-matrixChars = matrixChars.split('');
-const matrixFontSize = 16;
-let matrixColumns = 0;
-let matrixDrops = [];
-let matrixGradient = null;
-let matrixPrimaryTextColor = '#00ff99'; // Default fallback
-
-function initializeMatrixState() {
-    matrixWidth = matrixCanvas.width = window.innerWidth;
-    matrixHeight = matrixCanvas.height = window.innerHeight;
-    matrixColumns = Math.floor(matrixWidth / matrixFontSize);
-    matrixDrops = [];
-    for (let i = 0; i < matrixColumns; i++) {
-        matrixDrops[i] = 1 + Math.floor(Math.random() * (matrixHeight / matrixFontSize));
-    }
-
-    // Gradient for the background
-    if (matrixCtx) { // Ensure context is available
-        matrixGradient = matrixCtx.createLinearGradient(0, 0, 0, matrixHeight);
-        matrixGradient.addColorStop(0, '#0f0f0f'); // --dark-bg-primary
-        matrixGradient.addColorStop(1, '#1a1a1a'); // --dark-bg-secondary
-    }
-
-    // Primary text color from CSS variable
-    try {
-        const rootStyle = getComputedStyle(document.documentElement);
-        const cssVarColor = rootStyle.getPropertyValue('--dark-text-primary').trim();
-        if (cssVarColor) matrixPrimaryTextColor = cssVarColor;
-    } catch (e) {
-        console.warn('Could not read --dark-text-primary CSS variable for matrix animation.', e);
-    }
-}
-
-function drawMatrix() {
-    if (!matrixCtx || !matrixGradient) return;
-
-    // Draw the gradient background first
-    matrixCtx.fillStyle = matrixGradient;
-    matrixCtx.fillRect(0, 0, matrixWidth, matrixHeight);
-
-    // Then draw the semi-transparent layer for trails
-    matrixCtx.fillStyle = 'rgba(15, 15, 15, 0.1)'; // #0f0f0f with alpha
-    matrixCtx.fillRect(0, 0, matrixWidth, matrixHeight);
-
-    matrixCtx.fillStyle = matrixPrimaryTextColor;
-    matrixCtx.font = matrixFontSize + 'px "Fira Code", "Courier New", monospace';
-
-    for (let i = 0; i < matrixDrops.length; i++) {
-        const text = matrixChars[Math.floor(Math.random() * matrixChars.length)];
-        matrixCtx.fillText(text, i * matrixFontSize, matrixDrops[i] * matrixFontSize);
-
-        if (matrixDrops[i] * matrixFontSize > matrixHeight && Math.random() > 0.975) {
-            matrixDrops[i] = 0;
-        }
-        matrixDrops[i]++;
-    }
-}
-
-function resizeMatrixCanvas() {
-    // Re-initialize state which includes recalculating dimensions, columns, drops, gradient
-    if (matrixCanvas && matrixCtx) { // Ensure canvas and context are still valid
-       initializeMatrixState();
-    }
-}
-
-function startMatrixAnimation() {
-    if (matrixIntervalId) return; // Already running
-
-    matrixCanvas = document.getElementById('matrix-canvas');
-    if (!matrixCanvas) {
+document.addEventListener('DOMContentLoaded', function() {
+    const canvas = document.getElementById('matrix-canvas');
+    if (!canvas) {
         console.error('Matrix Canvas not found. Animation cannot start.');
         return;
     }
-    matrixCtx = matrixCanvas.getContext('2d');
-    if (!matrixCtx) {
-        console.error('Could not get 2D context from Matrix Canvas.');
-        return;
+    const ctx = canvas.getContext('2d');
+
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    // Characters: Katakana subset, or mix with letters/numbers
+    let chars = "アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    chars = chars.split('');
+
+    const fontSize = 16;
+    let columns = Math.floor(width / fontSize);
+    let drops = [];
+    for (let i = 0; i < columns; i++) {
+        drops[i] = 1 + Math.floor(Math.random() * (height / fontSize));
     }
 
-    matrixCanvas.style.display = 'block'; // Ensure canvas is visible
+    // Gradient for the background
+    let gradient = ctx.createLinearGradient(0, 0, 0, height);
+    gradient.addColorStop(0, '#0f0f0f'); // --dark-bg-primary
+    gradient.addColorStop(1, '#1a1a1a'); // --dark-bg-secondary (or a slightly different dark shade)
 
-    initializeMatrixState(); // Set up initial dimensions, drops, gradient etc.
+    // Primary text color from CSS variable (fallback if not available)
+    let primaryTextColor = '#00ff99'; // Default fallback
+    try {
+        const rootStyle = getComputedStyle(document.documentElement);
+        const cssVarColor = rootStyle.getPropertyValue('--dark-text-primary').trim();
+        if (cssVarColor) primaryTextColor = cssVarColor;
+    } catch (e) {
+        console.warn('Could not read --dark-text-primary CSS variable for matrix animation.', e);
+    }
 
-    matrixIntervalId = setInterval(drawMatrix, 45);
-    window.addEventListener('resize', resizeMatrixCanvas);
-    console.log("Matrix Animation Started");
-}
 
-function stopMatrixAnimation() {
-    if (matrixIntervalId) {
-        clearInterval(matrixIntervalId);
-        matrixIntervalId = null;
-        if (matrixCtx && matrixCanvas) {
-            matrixCtx.clearRect(0, 0, matrixCanvas.width, matrixCanvas.height);
-             matrixCanvas.style.display = 'none'; // Hide canvas
+    function draw() {
+        // Draw the gradient background first
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, width, height);
+
+        // Then draw the semi-transparent layer for trails (on top of gradient)
+        // This makes previous characters fade out gradually.
+        // The alpha value (0.1 here) controls the length of the trails.
+        ctx.fillStyle = 'rgba(15, 15, 15, 0.1)'; // #0f0f0f with alpha
+        ctx.fillRect(0, 0, width, height);
+
+        ctx.fillStyle = primaryTextColor;
+        ctx.font = fontSize + 'px "Fira Code", "Courier New", monospace'; // Ensure Fira Code is used
+
+        for (let i = 0; i < drops.length; i++) {
+            const text = chars[Math.floor(Math.random() * chars.length)];
+            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+            // Sending the drop back to the top randomly after it has crossed the screen
+            // adding a random factor to make the rain lines appear at different times
+            if (drops[i] * fontSize > height && Math.random() > 0.975) {
+                drops[i] = 0;
+            }
+            drops[i]++;
         }
-        window.removeEventListener('resize', resizeMatrixCanvas);
-        console.log("Matrix Animation Stopped");
     }
-}
 
-// The theme-switcher will call startMatrixAnimation() when the matrix theme is active.
-// No automatic start on DOMContentLoaded here anymore.
-// Example initial call if matrix theme is default (handled by theme-switcher.js now):
-// document.addEventListener('DOMContentLoaded', () => {
-//     if (!document.body.classList.contains('theme-glow')) { // Or check localStorage
-//         startMatrixAnimation();
-//     }
-// });
+    let intervalId = setInterval(draw, 45); // Adjusted for potentially better performance (around 22fps)
+
+    window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+        columns = Math.floor(width / fontSize);
+        drops = [];
+        for (let i = 0; i < columns; i++) {
+            drops[i] = 1 + Math.floor(Math.random() * (height / fontSize));
+        }
+        // Re-create gradient on resize as its height dependent
+        gradient = ctx.createLinearGradient(0, 0, 0, height);
+        gradient.addColorStop(0, '#0f0f0f');
+        gradient.addColorStop(1, '#1a1a1a');
+
+        // Re-fetch text color in case theme changed dynamically (though not implemented here)
+        try {
+            const rootStyle = getComputedStyle(document.documentElement);
+            const cssVarColor = rootStyle.getPropertyValue('--dark-text-primary').trim();
+            if (cssVarColor) primaryTextColor = cssVarColor;
+        } catch (e) {
+            // console.warn('Could not re-read --dark-text-primary on resize.', e);
+        }
+    });
+});

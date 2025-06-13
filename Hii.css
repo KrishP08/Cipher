@@ -40,12 +40,6 @@
     --dark-special-button-hover-bg: var(--dark-accent-hover);
     --dark-decrypt-button-bg: #c0392b; /* Keep a distinct warning/error red */
     --dark-decrypt-button-hover-bg: #a93226;
-
-    /* Glow Theme Specific Variables (can also be in cipher-animations.css if body.theme-glow is prefixed) */
-    --glow-cipher-primary: #00bcd4;
-    --glow-cipher-secondary: #ffeb3b;
-    --glow-cipher-card-background: #1a1a1a; /* Using a dark base for glow cards */
-    --glow-cipher-text: #f0f0f0;
 }
 
 /* General Styles */
@@ -263,10 +257,10 @@ hr {
 }
 
 .matrix-cell {
-    /* padding: 10px; /* This will be overridden by the later specific rule */
+    padding: 10px;
     font-size: 1rem;
-    /* width: 60px; /* This will be overridden */
-    /* height: 50px; /* This will be overridden */
+    width: 60px; /* Increased from 50px for better touch target / visual */
+    height: 50px; /* Increased from 40px */
     /* margin: 2px; /* Replaced by grid gap */
     text-align: center;
     border-radius: 5px;
@@ -275,13 +269,8 @@ hr {
     border: 1px solid var(--dark-border-color);
     /* display: inline-block; /* No longer needed with CSS Grid */
     /* margin-bottom: 10px; /* Grid gap will handle spacing */
+    /* margin: 2px; /* Replaced by grid-gap */
     transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
-}
-
-.matrix-cell::placeholder {
-    color: var(--dark-text-secondary, #00b36b); /* Use the dimmer green */
-    opacity: 0.6; /* Make it slightly less prominent than actual input text */
-    font-size: 0.8em; /* Slightly smaller to fit '[r,c]' comfortably */
 }
 
 .matrix-cell:focus {
@@ -543,5 +532,3 @@ th { /* Table headers distinct */
     /* font-size, margin, text-align, border-radius, border, background-color, color, box-sizing, display, transition
        are inherited from the earlier .matrix-cell rule or global styles */
 }
-
-[end of Hii.css]
