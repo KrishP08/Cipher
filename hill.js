@@ -1,18 +1,37 @@
 function generateMatrixInputs() {
-    const matrixSize = parseInt(document.getElementById("matrix-size").value);
-    const matrixInputs = document.getElementById("matrix-inputs");
-    matrixInputs.innerHTML = '';
+    const matrixSizeInput = document.getElementById('matrix-size');
+    const matrixSize = parseInt(matrixSizeInput.value);
+    const matrixInputsContainer = document.getElementById('matrix-inputs');
 
-    // Dynamically generate matrix inputs based on the matrix size
-    for (let row = 0; row < matrixSize; row++) {
-        for (let col = 0; col < matrixSize; col++) {
-            matrixInputs.innerHTML += `<input class="matrix-cell" type="number" id="key-${row}-${col}" placeholder="[${row + 1}, ${col + 1}]"> `;
+    // Error Handling/Validation
+    if (isNaN(matrixSize) || matrixSize < parseInt(matrixSizeInput.min) || matrixSize > parseInt(matrixSizeInput.max)) {
+        console.error("Invalid matrix size entered.");
+        matrixInputsContainer.innerHTML = `<p style="color: var(--dark-output-strong-color, #ff6b6b);">Invalid matrix size. Please enter a number between ${matrixSizeInput.min} and ${matrixSizeInput.max}.</p>`;
+        return;
+    }
+
+    // Clear Existing Inputs
+    matrixInputsContainer.innerHTML = '';
+
+    // Set CSS Grid properties on the container
+    matrixInputsContainer.style.setProperty('--matrix-size', matrixSize); // Pass size to CSS
+
+    // Nested Loops to Create Cells
+    for (let i = 0; i < matrixSize; i++) {
+        for (let j = 0; j < matrixSize; j++) {
+            const cell = document.createElement('input');
+            cell.type = 'number';
+            cell.classList.add('matrix-cell');
+            cell.id = `key-${i}-${j}`; // Kept original ID format for getKeyMatrix
+            // cell.placeholder = "0"; // Optional: if needed
+            matrixInputsContainer.appendChild(cell);
         }
-        matrixInputs.innerHTML += '<br>';
     }
 }
 
-generateMatrixInputs();  // Initialize the default 3x3 matrix
+document.addEventListener('DOMContentLoaded', function() {
+    generateMatrixInputs();  // Initialize the matrix
+});
 
 function getKeyMatrix(matrixSize) {
     let keyMatrix = [];
