@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="nav.css">
 </head>
 <body>
+    <div id="particles-js"></div>
     <nav>
         <button class="menu-btn">&#9776;</button>
         <ul>
@@ -27,8 +28,8 @@
             <li><a href="CaesarCipher.html">Caesar Cipher</a></li>
           </ul>
     </div>
+    <h1 class="cipher-title">Playfair Cipher</h1>
     <div class="container">
-        <h1>Playfair Cipher</h1>
         <form id="cipherForm">
             <label for="operation">Select Operation:</label><br>
             <select id="operation" name="operation" required>
@@ -59,6 +60,7 @@
         </div>
     </div>
 
+    <script src="particles.min.js"></script>
     <script src="pf.js"></script>
     <script src="shared.js" defer></script>
 </body>
