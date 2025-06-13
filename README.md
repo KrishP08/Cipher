@@ -1,4 +1,4 @@
-Hi My name is Krish Patel
+
 # Cipher Collection Website
 
 Welcome to the **Cipher Collection**, a web-based tool to explore five classical encryption techniques. This project demonstrates the implementation of these algorithms using **JavaScript** and **HTML**. You can interact with each cipher through a simple and intuitive interface.
