@@ -1,139 +1,373 @@
 /* General Styles */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Roboto', Arial, sans-serif;
-    background-color: #f0f4f8;
-    color: #333;
+    background-color: #f0f4f8; /* Default background */
+    color: #333; /* Default text color */
     margin: 0;
-    padding: 0;
+    padding: 20px; /* Default padding */
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    border-radius: 8px; /* From index.html */
+    padding-top: 50px; /* Add space for the fixed navbar, from index.html */
+    line-height: 1.6; /* Base line-height for readability */
 }
 
 .container {
     background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 40px;
-    max-width: 800px;
+    border-radius: 10px; /* Default border-radius */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Default shadow */
+    padding: 40px; /* Default padding */
+    max-width: 800px; /* Default max-width */
     width: 100%;
-    margin: 20px;
+    margin: 20px auto; /* Centering and margin */
 }
 
 h1, h2, h3 {
-    font-weight: 600;
-    color: #2c3e50;
+    font-weight: 600; /* Default font-weight */
+    color: #2c3e50; /* Default color */
     text-align: center;
+    margin-top: 1.5em; /* Standardized top margin */
+    margin-bottom: 0.75em; /* Standardized bottom margin */
+    line-height: 1.2; /* Tighter line-height for headings */
 }
 
 h1 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
+    font-size: 2.5rem; /* Default font-size */
+    margin-top: 0; /* Often page titles don't need top margin if header/nav is present */
+}
+
+h2 {
+    font-size: 2rem; /* Defined font size for h2 */
+    /* color from Playfair.html & CaesarCipher.html - Keep default or decide specific? */
+    /* For now, keep general styling from Hii.css */
 }
 
 h3 {
-    margin-top: 20px;
-    font-size: 1.2rem;
-    margin-bottom: 10px;
+    font-size: 1.5rem; /* Slightly larger h3 for better hierarchy */
 }
 
-input[type="number"], input[type="text"] {
+p, label { /* General styling for paragraphs and labels */
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 0.5em; /* Spacing below paragraphs/labels */
+}
+
+label { /* Specific label styling from before, maintained */
+    font-weight: bold;
+    margin-top: 10px;
+    display: block; /* From Railfence, otp */
+}
+
+
+input[type="number"], input[type="text"], textarea, select {
     padding: 10px;
     font-size: 1rem;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    margin-bottom: 10px;
+    border-radius: 5px; /* Default border-radius */
+    border: 1px solid #ccc; /* Default border */
+    margin-bottom: 10px; /* Default margin */
     box-sizing: border-box;
+    width: 100%; /* Common style */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* From index.html, Railfence, otp */
+    transition: border-color 0.2s, box-shadow 0.2s; /* Added box-shadow to transition */
+    margin: 10px 0; /* from index.html, Railfence, otp - can override specific cases if needed */
 }
 
-input[type="number"]:focus, input[type="text"]:focus {
+input[type="number"]:focus, input[type="text"]:focus, textarea:focus, select:focus {
     outline: none;
-    border-color: #3498db;
-    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+    border-color: #3498db; /* Default focus color */
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5); /* Default focus shadow */
+}
+
+textarea {
+    resize: none; /* Prevents resizing - from Railfence.html */
 }
 
 button {
-    background-color: #3498db;
-    color: white;
+    background-color: #3498db; /* Default background */
+    color: white; /* Default text color */
     border: none;
-    padding: 10px 20px;
-    font-size: 1.1rem;
-    border-radius: 5px;
+    padding: 10px 20px; /* Default padding */
+    font-size: 1.1rem; /* Default font-size */
+    border-radius: 5px; /* Default border-radius */
     cursor: pointer;
-    margin-top: 20px;
-    width: 100%;
+    margin-top: 20px; /* Default margin-top */
+    width: 100%; /* Default width */
+    font-weight: bold; /* From index.html, Railfence, otp */
+    transition: background-color 0.2s, transform 0.2s ease-out, box-shadow 0.2s ease-out; /* Added transform and box-shadow */
 }
 
 button:hover {
-    background-color: #2980b9;
+    background-color: #2980b9; /* Default hover background */
+    transform: scale(1.05); /* Slight scale on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
 }
 
-.matrix-cell {
-    padding: 10px;
-    font-size: 1rem;
-    width: 60px;
-    margin: 2px;
-    text-align: center;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    display: inline-block;
-    margin-bottom: 10px;
+button:active {
+    transform: scale(0.98); /* Slight shrink on click */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Reduce shadow on click */
 }
 
-.matrix-cell:focus {
-    outline: none;
-    border-color: #3498db;
-    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+/* Specific button styles that were common */
+/* Ensure transitions apply to specific buttons too if they override background-color */
+button.decrypt-btn { /* From CaesarCipher.html */
+    background-color: #f44336;
+    /* transition is inherited */
 }
 
-select {
-    padding: 10px;
-    font-size: 1rem;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    margin-bottom: 20px;
+button.decrypt-btn:hover { /* From CaesarCipher.html */
+    background-color: #e53935;
+    transform: scale(1.05); /* Ensure hover effect is consistent */
 }
+
+.expand-btn { /* From CaesarCipher.html - ensure it inherits general button transitions or define them */
+    background-color: #4A90E2; /* Already defined */
+    /* transition is inherited */
+}
+
+.expand-btn { /* From CaesarCipher.html - ensure it inherits general button transitions or define them */
+    background-color: #3A7BC2; /* Darkened blue for better contrast */
+    /* transition is inherited */
+}
+
+.expand-btn:hover { /* From CaesarCipher.html */
+    background-color: #2c6aa0; /* Darker hover for the new blue */
+    transform: scale(1.05); /* Ensure hover effect is consistent */
+}
+
+.collapsible { /* From otp.html - ensure it inherits general button transitions or define them */
+    background-color: #007bff; /* Already defined */
+     /* transition is inherited if we make it a button, or add explicitly if it's not a button element */
+     /* Assuming .collapsible is a <button> or has button role for these effects */
+}
+
+.collapsible:hover {
+    background-color: #0056b3; /* Example hover for collapsible */
+    transform: scale(1.02); /* More subtle scale for full-width items */
+}
+
+/* Animation for result sections */
+.fade-in {
+    animation: fadeInAnimation 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeInAnimation {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Styles for smaller buttons (e.g. index.html encrypt/decrypt, CaesarÇipher encrypt/decrypt) */
+/* These might need more specific selectors if they conflict */
+.compact-button { /* Made up class for a more specific selector if needed */
+    width: auto; /* Compact button size from index.html */
+    padding: 8px 12px; /* from index.html */
+    margin: 5px 1%; /* From CaesarCipher.html - for side-by-side buttons */
+}
+
 
 .output {
-    background-color: #ecf0f1;
+    background-color: #ecf0f1; /* Default background */
     padding: 15px;
     border-radius: 5px;
-    border-left: 5px solid #3498db;
+    border-left: 5px solid #3498db; /* Default border-left */
     margin-top: 20px;
     font-family: 'Courier New', Courier, monospace;
     line-height: 1.6;
-    color: #2c3e50;
+    color: #2c3e50; /* Default text color */
+    border: 1px solid #ced4da; /* From index.html, Railfence, otp */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* From index.html, Railfence, otp */
+    opacity: 0; /* Prepare for fade-in */
 }
 
-.output strong {
-    color: #e74c3c;
+.output strong { /* From original Hii.css */
+    color: #C0392B; /* Darker red for better contrast */
 }
 
-hr {
+hr { /* From original Hii.css */
     border: 0;
     border-top: 1px solid #ddd;
     margin: 20px 0;
 }
 
+/* Matrix specific styles from index.html and original Hii.css */
+.matrix-cell {
+    padding: 10px; /* Hii.css original had more padding */
+    font-size: 1rem;
+    width: 60px;
+    margin: 2px;
+    text-align: center;
+    border-radius: 5px; /* Hii.css original */
+    border: 1px solid #ccc; /* Hii.css original */
+    display: inline-block; /* Hii.css original */
+    margin-bottom: 10px; /* Hii.css original */
+    background-color: #f8f9fa; /* index.html */
+}
+
+.matrix-cell:focus {
+    outline: none;
+    border-color: #007bff; /* index.html had a different focus color */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Keep Hii.css original for consistency, adjusted alpha for visibility */
+    background-color: #e2e6ea; /* index.html */
+    transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s; /* Added transitions for matrix cells */
+}
+
 #matrix-inputs {
     display: flex;
     flex-wrap: wrap;
-    gap: 5px;
-    justify-content: center;
+    gap: 5px; /* Hii.css original */
+    justify-content: center; /* Hii.css original */
 }
 
-#matrix-inputs input {
+#matrix-inputs input { /* From Hii.css */
     text-align: center;
 }
 
-/* Responsiveness */
+@media (min-width: 768px) { /* From index.html */
+    #matrix-inputs {
+        flex-direction: row;
+    }
+}
+
+.matrix-container { /* From index.html */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+
+/* Styles from CaesarCipher.html */
+/* Styles from CaesarCipher.html (label moved up) */
+.result-section { /* From CaesarCipher.html */
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 15px;
+    margin-top: 20px;
+    text-align: center;
+    opacity: 0; /* Prepare for fade-in */
+}
+
+.result-section h2 { /* From CaesarCipher.html */
+    color: #357ABD; /* Darker blue for better contrast */
+    margin-top: 0;
+}
+
+.collapse-section { /* From CaesarCipher.html */
+    margin-top: 20px;
+}
+
+.tables-container { /* From CaesarCipher.html */
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.table-wrapper { /* From CaesarCipher.html */
+    width: 48%;
+}
+
+table { /* From CaesarCipher.html */
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td { /* From CaesarCipher.html */
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    background-color: #f9f9f9;
+}
+
+.collapse-content { /* From CaesarCipher.html & otp.html */
+    padding: 0 18px; /* otp.html */
+    display: none;
+    overflow: hidden;
+    background-color: #f1f1f1;
+    border-radius: 5px; /* otp.html */
+    margin-top: 10px; /* otp.html */
+}
+
+.expand-btn { /* From CaesarCipher.html */
+    background-color: #4A90E2;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 4px;
+}
+
+.expand-btn:hover { /* From CaesarCipher.html */
+    background-color: #357ABD;
+}
+
+
+/* Styles from Playfair.html */
+.matrix, .ciphertext, .digraphs { /* .matrix was also in original Hii.css, but for cells. This is a display box. */
+    font-family: monospace;
+    white-space: pre;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    display: inline-block; /* This might conflict with .output if used on same element */
+    margin-top: 10px;
+}
+
+.result-box { /* From Playfair.html */
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 15px;
+    margin-top: 20px;
+    opacity: 0; /* Prepare for fade-in */
+}
+
+/* Styles from Railfence.html */
+.ciphertext { /* This class is used in Playfair and Railfence for different text displays */
+    font-weight: bold;
+    color: #006400; /* Darker green for better contrast */
+    margin-top: 10px;
+}
+
+.rail { /* From Railfence.html */
+    font-family: monospace;
+    white-space: pre;
+    margin-bottom: 5px;
+}
+
+/* Styles from otp.html */
+.collapsible { /* From otp.html */
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+
+/* Responsiveness - keeping the most encompassing ones from original Hii.css */
 @media (max-width: 768px) {
     .container {
         padding: 20px;
     }
 
-    input[type="number"], input[type="text"], button {
+    input[type="number"], input[type="text"], textarea, select, button {
         font-size: 0.9rem;
     }
 
@@ -147,12 +381,12 @@ hr {
         font-size: 1.5rem;
     }
 
-    input[type="number"], input[type="text"] {
+    input[type="number"], input[type="text"], textarea, select { /* Ensure all input types are covered */
         width: 100%;
     }
 
     button {
         font-size: 1rem;
-        padding: 15px;
+        padding: 15px; /* More padding for smaller screens */
     }
 }

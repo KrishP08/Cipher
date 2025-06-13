@@ -5,122 +5,7 @@
     <meta name="google-site-verification" content="hKKyuTo3S2WNAc33As1zCCvIllgq6quS_g4yFS1g_VE" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dynamic Hill Cipher Encryption</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #e9ecef;
-            color: #343a40;
-            margin: 0; /* Reset margin */
-            padding: 20px;
-            border-radius: 8px;
-        }
-        
-        h1, h2, h3 {
-            color: #007bff;
-            margin-bottom: 15px;
-        }
-        
-        input, button, select {
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ced4da;
-            border-radius: 5px;
-            width: 100%;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: border-color 0.2s;
-        }
-        
-        input:focus, button:focus, select:focus {
-            border-color: #80bdff;
-            outline: none;
-        }
-        
-        button {
-            background-color: #007bff;
-            color: white;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        
-        button:hover {
-            background-color: #0056b3;
-        }
-        
-        .output {
-            background-color: #fff;
-            border: 1px solid #ced4da;
-            border-radius: 5px;
-            padding: 15px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-        
-        .matrix-cell {
-            width: 60px;
-            margin: 2px;
-            border: 1px solid #ced4da;
-            border-radius: 3px;
-            text-align: center;
-            background-color: #f8f9fa;
-        }
-        
-        .matrix-cell:focus {
-            outline: none;
-            border-color: #007bff;
-            background-color: #e2e6ea;
-        }
-        
-        #matrix-inputs {
-            display: flex;
-            flex-wrap: wrap;
-        }
-        
-        @media (min-width: 768px) {
-            #matrix-inputs {
-                flex-direction: row;
-            }
-        }
-        
-        .matrix-container {
-            display: flex; 
-            flex-direction: column; 
-            gap: 10px; 
-            margin-bottom: 20px;
-        }
-        
-  
-        /* Adjust body padding for navbar height */
-        body {
-            padding-top: 50px; /* Add space for the fixed navbar */
-        }
-        input, button, select {
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ced4da;
-            border-radius: 5px;
-            width: 100%;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: border-color 0.2s;
-        }
-
-        input:focus, button:focus, select:focus {
-            border-color: #80bdff;
-            outline: none;
-        }
-
-        button {
-            background-color: #007bff;
-            color: white;
-            cursor: pointer;
-            font-weight: bold;
-            border: none;
-            padding: 8px 12px;
-            width: auto; /* Compact button size */
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <link rel="stylesheet" href="Hii.css">
     <link rel="stylesheet" href="nav.css">
 </head>
 <body>
@@ -155,12 +40,12 @@
     <button onclick="generateRandomKeyMatrix()">Generate Random Key</button>
     
     <h3>Enter Plaintext (auto-padded):</h3>
-    <input type="text" id="plaintext" placeholder="Enter plaintext" style="width: 300px;">
+    <input type="text" id="plaintext" placeholder="Enter plaintext">
     <h3>Generate Random Plaintext:</h3>
     <button onclick="generateRandomPlaintext()">Generate Random Plaintext</button>
 
     <h3>Enter Ciphertext:</h3>
-    <input type="text" id="ciphertext" placeholder="Enter ciphertext" style="width: 300px;">
+    <input type="text" id="ciphertext" placeholder="Enter ciphertext">
 
     <div>
         <button onclick="runHillCipher('encrypt')">Encrypt</button>
@@ -170,6 +55,7 @@
     <h2>Output:</h2>
     <div class="output" id="output"></div>
     <script src="hill.js"></script>
+    <script src="shared.js" defer></script>
 
 </body>
 </html>

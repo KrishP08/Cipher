@@ -4,98 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>One-Time Pad Cipher</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #e9ecef;
-            color: #343a40;
-            margin: 20px;
-            padding: 20px;
-            border-radius: 8px;
-        }
-        
-        h1 {
-            color: #007bff;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-        
-        .container {
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-        
-        label {
-            display: block;
-            margin-top: 10px;
-        }
-        
-        input[type="text"] {
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ced4da;
-            border-radius: 5px;
-            width: 100%;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: border-color 0.2s;
-        }
-        
-        input[type="text"]:focus {
-            border-color: #80bdff;
-            outline: none;
-        }
-        
-        button {
-            background-color: #007bff;
-            color: white;
-            cursor: pointer;
-            font-weight: bold;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            transition: background-color 0.2s;
-        }
-        
-        button:hover {
-            background-color: #0056b3;
-        }
-        
-        .output {
-            background-color: #fff;
-            border: 1px solid #ced4da;
-            border-radius: 5px;
-            padding: 15px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            margin-top: 20px;
-        }
-        
-        .collapsible {
-            background-color: #007bff;
-            color: white;
-            cursor: pointer;
-            padding: 10px;
-            width: 100%;
-            border: none;
-            text-align: left;
-            outline: none;
-            font-size: 16px;
-            border-radius: 5px;
-        }
-        
-        .content {
-            padding: 0 18px;
-            display: none;
-            overflow: hidden;
-            background-color: #f1f1f1;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
-
-    </style>
+    <link rel="stylesheet" href="Hii.css">
     <link rel="stylesheet" href="nav.css">
 </head>
 <body>
@@ -137,10 +46,11 @@
             <button type="submit">Submit</button>
         </form>
 
-        <div id="output" class="output" style="display:none;"></div>
+        <div id="output" class="output"></div>
     </div>
 
     <script src="otp.js"></script>
+    <script src="shared.js" defer></script>
 
 
 </body>

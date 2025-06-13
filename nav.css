@@ -1,8 +1,8 @@
 /* Reset margins and padding for the entire page */
 body, html {
     margin: 0;
-    padding: 4;
-    box-sizing: border-box; /* Ensure padding/margin don't affect element width */
+    padding: 0; /* Corrected padding */
+    /* box-sizing will be handled globally in Hii.css */
 }
 
 /* Navigation Bar Styles */
@@ -69,13 +69,14 @@ nav a.active {
 .sidebar {
     position: fixed;
     top: 0;
-    left: -250px; /* Initially hidden */
+    left: 0; /* Start at the edge for transform to work as expected */
+    transform: translateX(-100%); /* Initially hidden */
     width: 250px;
     height: 100%;
     background-color: #343a40;
     padding-top: 60px; /* To avoid overlap with the menu button */
     z-index: 1000;
-    transition: left 0.3s ease; /* Slide-out effect */
+    transition: transform 0.3s ease; /* Slide-out effect */
     box-shadow: 2px 0 5px rgba(0,0,0,0.2);
 }
 
@@ -124,7 +125,7 @@ nav a.active {
 
 /* Open sidebar (when the menu button is clicked) */
 .sidebar.open {
-    left: 0; /* Slide the sidebar in */
+    transform: translateX(0); /* Slide the sidebar in */
 }
 /* Style for the hamburger menu button */
 /* Style for the hamburger menu button */
