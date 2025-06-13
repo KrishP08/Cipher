@@ -1,0 +1,175 @@
+body.theme-glow {
+  --cipher-primary: #00bcd4; /* Example: Bright Cyan */
+  --cipher-secondary: #ffeb3b; /* Example: Bright Yellow */
+  --cipher-background: #111; /* This is not currently used by body.theme-glow directly */
+  --cipher-card-background: #1a1a1a;
+  --cipher-text: #f0f0f0;
+
+  /* Apply body styles directly here */
+  background-color: var(--dark-bg-primary) !important; /* Use important if it might conflict with Hii.css body transparent. Uses Matrix theme dark as base. */
+  color: var(--cipher-text);
+  font-family: 'Arial', sans-serif !important; /* Example font for this theme, use important if overriding Hii.css body font */
+}
+
+/* Ensure the Matrix canvas is hidden or adapted for the glow theme */
+body.theme-glow #matrix-canvas {
+    display: none; /* Hide the Matrix animation when glow theme is active */
+}
+
+/* Override general .container for glow theme */
+body.theme-glow .container,
+body.theme-glow .hill-section {
+    background-color: var(--dark-bg-secondary); /* Slightly lighter than body, from Matrix theme */
+    border: 1px solid var(--dark-accent-primary); /* Green border from Matrix theme as glow accent */
+    box-shadow: 0 0 15px var(--dark-accent-primary), 0 0 30px var(--dark-accent-primary); /* Green glow */
+    color: var(--cipher-text); /* Ensure text inside containers is light */
+}
+
+/* For example, to make text glow: */
+body.theme-glow h1,
+body.theme-glow h2,
+body.theme-glow h3,
+body.theme-glow .nav-cipher-title,
+body.theme-glow button,
+body.theme-glow .output strong { /* Apply glow to specific important text */
+    text-shadow: 0 0 5px var(--cipher-primary, #00bcd4),
+                 0 0 10px var(--cipher-primary, #00bcd4),
+                 0 0 15px var(--cipher-secondary, #ffeb3b);
+}
+
+
+/* Override buttons for glow */
+body.theme-glow button,
+body.theme-glow input[type="submit"], /* If any submit inputs are styled as buttons */
+body.theme-glow input[type="button"] { /* This covers .cipher-button if JS adds that class too */
+    background-color: var(--cipher-primary, #00bcd4); /* Glow theme button color */
+    color: var(--cipher-card-background, #1a1a1a); /* Dark text on bright button */
+    border: 1px solid var(--cipher-primary, #00bcd4);
+    text-shadow: 0 0 3px var(--cipher-card-background, #1a1a1a); /* Subtle text glow on button */
+    box-shadow: 0 0 8px var(--cipher-primary, #00bcd4);
+    font-family: 'Arial', sans-serif; /* Glow theme font for buttons */
+}
+
+body.theme-glow button:hover,
+body.theme-glow input[type="submit"]:hover,
+body.theme-glow input[type="button"]:hover {
+    background-color: var(--cipher-secondary, #ffeb3b);
+    color: var(--cipher-background, #111); /* Dark text on yellow button */
+    border-color: var(--cipher-secondary, #ffeb3b);
+    box-shadow: 0 0 12px var(--cipher-secondary, #ffeb3b), 0 0 20px var(--cipher-secondary, #ffeb3b);
+}
+
+/* Override specific buttons if needed, e.g., theme switcher */
+body.theme-glow #theme-switcher-btn {
+    background-color: var(--cipher-secondary, #ffeb3b); /* Make it stand out */
+    color: var(--cipher-background, #111);
+    border-color: var(--cipher-secondary, #ffeb3b);
+}
+body.theme-glow #theme-switcher-btn:hover {
+    background-color: var(--cipher-primary, #00bcd4);
+    color: var(--cipher-card-background, #1a1a1a);
+    border-color: var(--cipher-primary, #00bcd4);
+}
+
+
+/* Override input styles */
+body.theme-glow input[type="number"],
+body.theme-glow input[type="text"],
+body.theme-glow textarea,
+body.theme-glow select,
+body.theme-glow .matrix-cell { /* .matrix-cell included here */
+    background-color: #252525; /* Slightly different from card bg */
+    color: var(--cipher-text, #f0f0f0);
+    border: 1px solid var(--cipher-primary, #00bcd4);
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.5), 0 0 5px var(--cipher-primary, #00bcd4);
+    font-family: 'Courier New', monospace; /* Specific font for inputs in glow theme */
+}
+
+body.theme-glow input[type="number"]:focus,
+body.theme-glow input[type="text"]:focus,
+body.theme-glow textarea:focus,
+body.theme-glow select:focus,
+body.theme-glow .matrix-cell:focus {
+    border-color: var(--cipher-secondary, #ffeb3b); /* Yellow focus border */
+    box-shadow: 0 0 10px var(--cipher-secondary, #ffeb3b), inset 0 1px 3px rgba(0,0,0,0.5);
+}
+
+body.theme-glow input::placeholder,
+body.theme-glow textarea::placeholder,
+body.theme-glow .matrix-cell::placeholder { /* Style placeholders for glow theme */
+    color: rgba(240, 240, 240, 0.4); /* Lighter, semi-transparent placeholder */
+    font-size: 1em; /* Ensure it's not too small from matrix theme */
+    opacity: 1;
+}
+body.theme-glow .matrix-cell::placeholder { /* Specific adjustment if needed for [r,c] */
+    font-size: 0.8em; /* Keep it small for matrix cells */
+}
+
+
+/* Navigation adjustments for glow */
+body.theme-glow nav {
+    background-color: rgba(15, 15, 15, 0.8); /* Darker, slightly transparent nav */
+    backdrop-filter: blur(5px);
+    box-shadow: 0 0 15px var(--cipher-primary, #00bcd4);
+}
+
+body.theme-glow nav a,
+body.theme-glow .nav-cipher-title,
+body.theme-glow .menu-btn {
+    color: var(--cipher-text, #f0f0f0);
+    text-shadow: 0 0 5px var(--cipher-text, #f0f0f0); /* General text glow for nav items */
+}
+
+body.theme-glow nav a:hover,
+body.theme-glow .menu-btn:hover { /* .menu-btn also uses button styling, this might conflict or enhance */
+    background-color: var(--cipher-primary, #00bcd4);
+    color: var(--cipher-card-background, #1a1a1a);
+    text-shadow: none;
+}
+body.theme-glow nav a.active {
+    background-color: var(--cipher-secondary, #ffeb3b);
+    color: var(--cipher-background, #111);
+    text-shadow: none;
+    box-shadow: 0 0 8px var(--cipher-secondary, #ffeb3b);
+}
+
+body.theme-glow .sidebar {
+    background-color: rgba(26, 26, 26, 0.9); /* Slightly transparent card background for sidebar */
+    backdrop-filter: blur(5px);
+    border-right: 1px solid var(--cipher-primary, #00bcd4);
+    box-shadow: 2px 0 15px var(--cipher-primary, #00bcd4);
+}
+
+/* Ensure output areas also get some glow if desired */
+body.theme-glow .output,
+body.theme-glow .result-box,
+body.theme-glow .result-section {
+    /* These already get card styling from .container/.hill-section overrides */
+    border-left-color: var(--cipher-secondary, #ffeb3b); /* Change left accent border */
+    box-shadow: 0 0 15px var(--cipher-primary, #00bcd4), 0 0 30px var(--cipher-primary, #00bcd4);
+}
+
+body.theme-glow .output strong {
+    color: var(--dark-output-strong-color); /* Keep the contrasting red/pink */
+    text-shadow: 0 0 5px var(--dark-output-strong-color), 0 0 10px var(--dark-output-strong-color);
+}
+
+/* Table styling for glow */
+body.theme-glow th {
+    background-color: var(--cipher-primary, #00bcd4);
+    color: var(--cipher-card-background, #1a1a1a);
+    text-shadow: none;
+}
+
+body.theme-glow td {
+    background-color: #252525; /* Slightly different from card bg for cells */
+    color: var(--cipher-text, #f0f0f0);
+    border-color: var(--cipher-primary, #00bcd4);
+}
+
+/* Keyframes are global and do not need prefixing */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}

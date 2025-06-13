@@ -23,7 +23,7 @@ function generateMatrixInputs() {
             cell.type = 'number';
             cell.classList.add('matrix-cell');
             cell.id = `key-${i}-${j}`; // Kept original ID format for getKeyMatrix
-            // cell.placeholder = "0"; // Optional: if needed
+            cell.placeholder = `[${i},${j}]`; // Add placeholder for [row,col]
             matrixInputsContainer.appendChild(cell);
         }
     }
