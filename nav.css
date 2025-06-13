@@ -26,17 +26,18 @@ nav {
     font-size: 1.4em;
     color: var(--dark-text-primary);
     font-weight: bold;
-    margin-right: 15px; /* Add some space between title and links/button */
+    /* margin-right: auto; /* Let flex space-between handle spacing */
 }
 
 /* Navigation links container */
 nav ul {
     list-style-type: none;
     padding: 0;
-    margin: 0;
+    margin: 0; /* Remove default margins */
     display: flex;
-    justify-content: center; /* Center links if title is not pushing them */
-    flex-grow: 1; /* Allow ul to take space if title is short */
+    justify-content: center;
+    flex-grow: 1; /* Allows links to take up space and center, pushing switcher/menu to right */
+    /* margin-left: auto; /* Remove this to allow switcher to be to its right */
 }
 
 /* Individual list items and links */
@@ -61,20 +62,21 @@ nav a.active {
 }
 
 #theme-switcher-btn {
-    padding: 8px 12px;
-    margin-left: 15px; /* Space from other nav items */
-    background-color: var(--dark-button-bg, #008055); /* Use theme variable */
-    color: var(--dark-button-text, #0f0f0f);
+    padding: 5px 10px; /* Smaller padding */
+    margin-left: 10px; /* Space from other nav items */
+    background-color: var(--dark-button-bg, #008055); /* From Matrix theme */
+    color: var(--dark-button-text, #0f0f0f); /* From Matrix theme */
     border: 1px solid var(--dark-border-color, #2d2d2d);
-    border-radius: 5px;
+    border-radius: 4px; /* Slightly smaller radius */
     cursor: pointer;
-    font-family: inherit; /* Inherit Fira Code/Arial based on theme */
-    font-size: 0.9em;
-    white-space: nowrap; /* Prevent button text from wrapping */
+    font-family: inherit; /* Inherit Fira Code for Matrix theme */
+    font-size: 0.85em; /* Smaller font size */
+    white-space: nowrap;
+    order: 2; /* Place after links, before menu button on mobile */
 }
 
 #theme-switcher-btn:hover {
-    background-color: var(--dark-button-hover-bg, #00995c);
+    background-color: var(--dark-button-hover-bg, #00995c); /* From Matrix theme */
 }
 
 
@@ -90,8 +92,8 @@ nav a.active {
     padding: 5px 8px; /* Adjusted padding */
     border-radius: 5px; /* Rounded corners */
     transition: background-color 0.3s ease; /* Smooth hover effect */
-    margin-left: 10px; /* Space from theme switcher or links */
-    order: 3; /* Ensure it's on the far right on mobile */
+    margin-left: 10px; /* Space from theme switcher */
+    order: 3;
 }
 
 .menu-btn:hover {
@@ -153,7 +155,8 @@ nav a.active {
     }
     .nav-cipher-title {
         font-size: 1.1em; /* Slightly smaller on mobile */
-        margin-right: 10px; /* Adjust space */
+        margin-right: 0; /* Allow space-between to handle it */
+        flex-shrink: 0; /* Prevent title from shrinking too much */
     }
 
     nav ul { /* This is for desktop links, should be hidden */
@@ -161,16 +164,16 @@ nav a.active {
     }
 
     #theme-switcher-btn {
-        font-size: 0.8em;
-        padding: 6px 10px;
-        margin-left: auto; /* Push to right, before menu button */
-        order: 2;
+        font-size: 0.8em; /* Smaller on mobile */
+        padding: 4px 8px; /* Adjust padding for mobile */
+        margin-left: auto; /* Pushes it to the right of title */
+        order: 2; /* Before menu button */
     }
 
     .menu-btn {
         display: block; /* Show the menu button */
-        /* position: static; /* Flex item, no need for absolute/static override here */
-        /* order: 3; /* Already set */
+        /* position: static; /* Already set above */
+        order: 3; /* After theme switcher */
     }
 
     .sidebar {

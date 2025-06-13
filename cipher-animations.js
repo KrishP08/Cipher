@@ -11,12 +11,12 @@ class CipherAnimations {
 
     init() {
         // console.log("CipherAnimations init called");
-        // This was part of the original provided JS, creates background elements
-        // These elements will be styled by cipher-animations.css when body.theme-glow is active
+        // Create background elements only if they don't exist
         if (!document.querySelector('.animated-background')) {
             this.animatedBg = document.createElement('div');
             this.animatedBg.classList.add('animated-background');
-            for (let i = 0; i < 10; i++) { // Create some shapes for the background
+            // Add shapes for the background if needed by the CSS
+            for (let i = 0; i < 10; i++) {
                 const shape = document.createElement('div');
                 shape.classList.add('shape', `shape-${i % 3 + 1}`);
                 shape.style.setProperty('--x', Math.random());
@@ -25,57 +25,51 @@ class CipherAnimations {
                 this.animatedBg.appendChild(shape);
             }
             document.body.appendChild(this.animatedBg);
+        } else {
+            // If it exists, just grab a reference
+            this.animatedBg = document.querySelector('.animated-background');
         }
-        this.enhanceExistingElements();
+        // enhanceExistingElements is not strictly needed if CSS handles targeting existing classes
+        // this.enhanceExistingElements();
     }
 
-    enhanceExistingElements() {
-        // console.log("Enhancing existing elements for Glow Theme");
-        // This function adds classes that will be styled by cipher-animations.css
-        // when body.theme-glow is active.
-        // document.querySelectorAll('h1, h2, .title, .main-title').forEach(el => el.classList.add('glow-text'));
-        // document.querySelectorAll('.container, .card, .hill-section').forEach(el => el.classList.add('cipher-card')); // Already handled by direct CSS overrides
-        // document.querySelectorAll('button, input[type="button"], input[type="submit"]').forEach(el => el.classList.add('cipher-button')); // Already handled
-        // document.querySelectorAll('input[type="text"], input[type="number"], textarea, select').forEach(el => el.classList.add('cipher-input')); // Already handled
-    }
+    // enhanceExistingElements() { ... } // Remains empty or for future use
 
-
-    // This method will be called when the glow theme is activated
     activateAnimations() {
         if (this.isGlowInitialized) return;
-        // console.log("Starting Glow Animations (dynamic parts)");
+        // console.log("Activating Glow Animations (dynamic parts)");
 
-        // Example: Add dynamic "float" animation to cards or specific elements
+        if (this.animatedBg) this.animatedBg.style.display = 'block';
+
         document.querySelectorAll('body.theme-glow .container, body.theme-glow .hill-section').forEach(card => {
             card.style.animation = 'float 3s ease-in-out infinite alternate';
             this.glowingElements.push(card);
         });
 
-        if (this.animatedBg) this.animatedBg.style.display = 'block'; // Ensure background is visible
-
         this.isGlowInitialized = true;
     }
 
-    // This method will be called when the glow theme is deactivated
     deactivateAnimations() {
-        // console.log("Stopping Glow Animations (dynamic parts)");
+        // console.log("Deactivating Glow Animations (dynamic parts)");
         this.glowingElements.forEach(el => {
-            el.style.animation = ''; // Remove the float animation
+            el.style.animation = '';
         });
         this.glowingElements = [];
 
-        if (this.animatedBg) this.animatedBg.style.display = 'none'; // Hide animated background
+        if (this.animatedBg) this.animatedBg.style.display = 'none';
 
         this.isGlowInitialized = false;
     }
 
-    destroy() { // If we need to fully remove elements created by this class
+    // destroy() is called when stopping the glow theme to clean up fully
+    destroy() {
+        // console.log("Destroying CipherAnimations instance and elements");
+        this.deactivateAnimations(); // Stop animations and clear listeners/styles
         if (this.animatedBg) {
-            this.animatedBg.remove();
+            this.animatedBg.remove(); // Remove the background div from DOM
             this.animatedBg = null;
         }
-        this.stopGlowAnimations(); // Ensure any running animations are cleared
-        // console.log("CipherAnimations instance destroyed");
+        // Any other specific cleanup for this class instance
     }
 }
 
@@ -83,19 +77,17 @@ let glowAnimationsInstance = null;
 
 function startGlowAnimations() {
     if (!glowAnimationsInstance) {
-        glowAnimationsInstance = new CipherAnimations(); // Creates .animated-background via constructor's init()
+        glowAnimationsInstance = new CipherAnimations();
     }
-    glowAnimationsInstance.activateAnimations(); // Starts float animations etc.
+    glowAnimationsInstance.activateAnimations();
     console.log("Glow Animations System Started/Activated");
 }
 
 function stopGlowAnimations() {
     if (glowAnimationsInstance) {
-        glowAnimationsInstance.deactivateAnimations();
-        // Optional: fully destroy and remove elements if they shouldn't persist in DOM when theme is off
-        // glowAnimationsInstance.destroy();
-        // glowAnimationsInstance = null;
-        console.log("Glow Animations System Stopped/Deactivated");
+        glowAnimationsInstance.destroy(); // Call destroy to fully clean up
+        glowAnimationsInstance = null;    // Nullify the instance so it's recreated next time
+        console.log("Glow Animations System Stopped/Destroyed");
     }
 }
 
