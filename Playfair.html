@@ -4,12 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Playfair Cipher</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="Hii.css">
     <link rel="stylesheet" href="nav.css">
 </head>
 <body>
+
+    <canvas id="matrix-canvas"></canvas>
+
     <div id="particles-js"></div>
+
     <nav>
+        <span class="nav-cipher-title">Playfair Cipher</span>
         <button class="menu-btn">&#9776;</button>
         <ul>
             <li><a href="index.html">Hill Cipher</a></li>
@@ -28,8 +36,12 @@
             <li><a href="CaesarCipher.html">Caesar Cipher</a></li>
           </ul>
     </div>
+
+    <div class="container content-fade-in">
+
     <h1 class="cipher-title">Playfair Cipher</h1>
     <div class="container">
+
         <form id="cipherForm">
             <label for="operation">Select Operation:</label><br>
             <select id="operation" name="operation" required>
@@ -63,5 +75,8 @@
     <script src="particles.min.js"></script>
     <script src="pf.js"></script>
     <script src="shared.js" defer></script>
+
+    <script src="matrix.js" defer></script>
+
 </body>
 </html>

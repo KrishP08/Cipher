@@ -53,9 +53,9 @@ document.getElementById('cipherForm').addEventListener('submit', function(event)
     });
     const resultDiv = document.getElementById('result');
     resultDiv.style.display = 'block'; // Show the result section
-    resultDiv.classList.remove('fade-in');
+    resultDiv.classList.remove('result-fade-in');
     void resultDiv.offsetWidth;
-    resultDiv.classList.add('fade-in');
+    resultDiv.classList.add('result-fade-in');
 });
 /*
 const menuBtn = document.querySelector('.menu-btn');

@@ -4,12 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Caesar Cipher Encryption & Decryption</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="Hii.css">
     <link rel="stylesheet" href="nav.css">
 </head>
 <body>
+
+<canvas id="matrix-canvas"></canvas>
 <div id="particles-js"></div>
+
 <nav>
+<span class="nav-cipher-title">Caesar Cipher</span>
 <button class="menu-btn">&#9776;</button> <!-- Hamburger button -->
     <ul>
         <li><a href="index.html">Hill Cipher</a></li>
@@ -29,8 +35,11 @@
     </ul>
 </div>
 
+<div class="container content-fade-in">
+
 <h1 class="cipher-title">Caesar Cipher</h1>
 <div class="container">
+
     <!-- Form for Input -->
     <form id="cipherForm">
         <label for="message">Message:</label>
@@ -96,6 +105,9 @@
 <script src="particles.min.js"></script>
 <script src="CaesarCipher.js"></script>
 <script src="shared.js" defer></script>
+
+<script src="matrix.js" defer></script>
+
 
 </body>
 </html>

@@ -111,18 +111,18 @@ document.getElementById('cipherForm').addEventListener('submit', function(event)
         document.getElementById('result').textContent = encResult;
         document.getElementById('ciphertext').textContent = ciphertext;
         resultBox.style.display = 'block';
-        resultBox.classList.remove('fade-in');
+        resultBox.classList.remove('result-fade-in');
         void resultBox.offsetWidth;
-        resultBox.classList.add('fade-in');
+        resultBox.classList.add('result-fade-in');
         document.getElementById('decryptionResult').style.display = 'none'; // Hide decryption results
     } else if (operation === 'decrypt') {
         const { result: decResult, plaintext } = playfairDecrypt(text, key);
         const decryptionResultBox = document.getElementById('decryptionResult');
         document.getElementById('decryptionResultContent').textContent = decResult;
         decryptionResultBox.style.display = 'block'; // Show decryption results
-        decryptionResultBox.classList.remove('fade-in');
+        decryptionResultBox.classList.remove('result-fade-in');
         void decryptionResultBox.offsetWidth;
-        decryptionResultBox.classList.add('fade-in');
+        decryptionResultBox.classList.add('result-fade-in');
         document.getElementById('resultBox').style.display = 'none'; // Hide encryption results
     }
 });

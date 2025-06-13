@@ -89,7 +89,7 @@ function runHillCipher(mode) {
     const keyMatrix = getKeyMatrix(matrixSize);
     let outputDiv = document.getElementById('output');
     outputDiv.innerHTML = '';  // Clear previous output
-    outputDiv.classList.remove('fade-in'); // Remove class if already present
+    outputDiv.classList.remove('result-fade-in'); // Remove class if already present
     void outputDiv.offsetWidth; // Trigger reflow
 
     if (mode === 'encrypt') {
@@ -149,7 +149,7 @@ function runHillCipher(mode) {
 
         outputDiv.innerHTML += `<strong>Final Decrypted Text: ${decryptedText}</strong>`;
     }
-    outputDiv.classList.add('fade-in'); // Add animation class after content is set
+    outputDiv.classList.add('result-fade-in'); // Add animation class after content is set
 }
 /*
 const menuBtn = document.querySelector('.menu-btn');

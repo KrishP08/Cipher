@@ -8,7 +8,7 @@ body, html {
 /* Navigation Bar Styles */
 nav {
     background-color: var(--dark-bg-secondary); /* Applied dark theme */
-    padding: 10px;
+    padding: 10px 20px; /* Adjusted padding */
     border-radius: 8px;
     position: fixed;
     top: 0;
@@ -16,10 +16,17 @@ nav {
     width: 100%;
     z-index: 1000;
     display: flex;
-    justify-content: center;
+    justify-content: space-between; /* Changed */
     align-items: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: left 0.3s ease; /* For sliding effect */
+}
+
+.nav-cipher-title {
+    font-size: 1.4em;
+    color: var(--dark-text-primary);
+    font-weight: bold;
+    margin-right: auto; /* Pushes other items to the right if needed, or rely on space-between */
 }
 
 /* Centering the links inside the nav */
@@ -109,6 +116,12 @@ nav a.active {
 
 /* Responsive design for smaller screens */
 @media (max-width: 768px) {
+    nav {
+        /* justify-content: space-between; already set, title on left, menu button on right */
+    }
+    .nav-cipher-title {
+        font-size: 1.2em; /* Slightly smaller on mobile */
+    }
     /* Hide horizontal navbar, show hamburger menu */
     nav ul {
         display: none;
@@ -116,6 +129,8 @@ nav a.active {
 
     .menu-btn {
         display: block; /* Show the menu button */
+        position: static; /* Remove absolute positioning to let flexbox handle it */
+        order: 3; /* Ensure it's on the far right if title and links were grouped */
     }
 
     .sidebar {
@@ -141,7 +156,7 @@ nav a.active {
     transition: background-color 0.3s ease; /* Smooth hover effect */
     position: absolute; /* Place it on the top */
     top: 10px; /* Adjust top position */
-    right: 10px; /* Adjust right position */
+    right: 10px; /* Adjust right position if not using flex order */
 }
 
 .menu-btn:hover {
@@ -152,6 +167,7 @@ nav a.active {
 @media (max-width: 768px) {
     .menu-btn {
         display: block; /* Show the button on small screens */
+         /* position: static; /* Already set above */
     }
 }
 
@@ -159,6 +175,7 @@ nav a.active {
 nav ul {
     display: flex; /* Default behavior */
     flex-direction: row; /* Horizontal layout */
+    margin-left: auto; /* Pushes links to the right of the title */
 }
 
 @media (max-width: 768px) {

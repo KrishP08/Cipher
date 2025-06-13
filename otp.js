@@ -140,9 +140,9 @@ function displayOutput(outputHtml) {
     const outputDiv = document.getElementById('output');
     outputDiv.innerHTML = outputHtml;
     outputDiv.style.display = 'block'; // Ensure it's block before animation
-    outputDiv.classList.remove('fade-in'); // Remove class if already present
+    outputDiv.classList.remove('result-fade-in'); // Remove class if already present
     void outputDiv.offsetWidth; // Trigger reflow
-    outputDiv.classList.add('fade-in'); // Add animation class
+    outputDiv.classList.add('result-fade-in'); // Add animation class
 
     const collapsibles = document.getElementsByClassName("collapsible");
     for (let i = 0; i < collapsibles.length; i++) {

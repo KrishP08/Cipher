@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>One-Time Pad Cipher</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="Hii.css">
     <link rel="stylesheet" href="nav.css">
 </head>
 <body>
-        <div id="particles-js"></div>
+        <canvas id="matrix-canvas"></canvas>
         <nav>
+            <span class="nav-cipher-title">One-Time Pad Cipher</span>
             <button class="menu-btn">&#9776;</button> <!-- Hamburger button -->
             <ul>
                 <li><a href="index.html">Hill Cipher</a></li>
@@ -29,8 +31,7 @@
             </ul>
         </div>
     
-    <h1 class="cipher-title">One-Time Pad Cipher</h1>
-    <div class="container">
+    <div class="container content-fade-in">
         <form id="cipherForm">
             <label for="plaintext">Text:</label>
             <input type="text" id="plaintext" placeholder="Enter the plaintext or ciphertext" required>
@@ -50,9 +51,9 @@
         <div id="output" class="output"></div>
     </div>
 
-    <script src="particles.min.js"></script>
     <script src="otp.js"></script>
     <script src="shared.js" defer></script>
+    <script src="matrix.js" defer></script>
 
 
 </body>
