@@ -28,8 +28,12 @@ function performEncrypt() {
     const message = document.getElementById("message").value;
     const shift = parseInt(document.getElementById("shift").value);
     const encryptedMessage = caesarCipher(message, shift);
+    const resultBox = document.getElementById("resultBox");
 
-    document.getElementById("resultBox").style.display = "block";
+    resultBox.style.display = "block";
+    resultBox.classList.remove('result-fade-in'); // Remove class if already present
+    void resultBox.offsetWidth; // Trigger reflow
+    resultBox.classList.add('result-fade-in'); // Add animation class
     document.getElementById("result").textContent = encryptedMessage;
 
     populateAlphabetTables(shift);
@@ -40,8 +44,12 @@ function performDecrypt() {
     const message = document.getElementById("message").value;
     const shift = parseInt(document.getElementById("shift").value);
     const decryptedMessage = caesarCipher(message, -shift);
+    const resultBox = document.getElementById("resultBox");
 
-    document.getElementById("resultBox").style.display = "block";
+    resultBox.style.display = "block";
+    resultBox.classList.remove('result-fade-in'); // Remove class if already present
+    void resultBox.offsetWidth; // Trigger reflow
+    resultBox.classList.add('result-fade-in'); // Add animation class
     document.getElementById("result").textContent = decryptedMessage;
 
     populateAlphabetTables(-shift);
@@ -87,7 +95,3 @@ function toggleCollapse() {
     const collapseContent = document.getElementById("collapseContent");
     collapseContent.style.display = (collapseContent.style.display === "block") ? "none" : "block";
 }
-
-document.querySelector('.menu-btn').addEventListener('click', function() {
-    document.querySelector('.sidebar').classList.toggle('open');
-});

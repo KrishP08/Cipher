@@ -1,153 +1,445 @@
+:root {
+    /* Light Theme (Original) - Kept for reference or future theme switcher */
+    --light-bg-primary: #f0f4f8;
+    --light-bg-secondary: #fff;
+    --light-text-primary: #333;
+    --light-text-secondary: #2c3e50;
+    --light-accent-primary: #007bff;
+    --light-accent-hover: #0056b3;
+    --light-border-color: #ccc;
+    --light-input-bg: #fff;
+    --light-input-text: #333;
+    --light-button-bg: #3498db;
+    --light-button-text: #ffffff;
+    --light-button-hover-bg: #2980b9;
+    --light-shadow-color: rgba(0, 0, 0, 0.1);
+    --light-output-strong-color: #C0392B;
+    --light-green-accent: #006400;
+    --light-special-button-bg: #3A7BC2;
+    --light-special-button-hover-bg: #2c6aa0;
+    --light-decrypt-button-bg: #f44336;
+    --light-decrypt-button-hover-bg: #e53935;
+
+    /* Hacker Theme Palette (Dark) */
+    --dark-bg-primary: #0f0f0f;
+    --dark-bg-secondary: #1a1a1a;
+    --dark-text-primary: #00ff99; /* Bright mint green */
+    --dark-text-secondary: #00b36b; /* Dimmer green */
+    --dark-accent-primary: #00cc7a; /* Accent green */
+    --dark-accent-hover: #00995c;  /* Darker accent green for hover */
+    --dark-border-color: #2a2a2a;
+    --dark-input-bg: #1a1a1a;      /* Same as secondary bg */
+    --dark-input-text: var(--dark-text-primary); /* Bright green text in inputs */
+    --dark-button-bg: var(--dark-accent-primary);
+    --dark-button-text: #0f0f0f; /* Very dark text for green buttons */
+    --dark-button-hover-bg: var(--dark-accent-hover);
+    --dark-shadow-color: rgba(0, 128, 85, 0.15); /* Subtle green shadow */
+    --dark-output-strong-color: #ff6b6b; /* Contrasting red/pink */
+    --dark-green-accent: var(--dark-text-primary); /* Use primary text for this specific green */
+    --dark-special-button-bg: var(--dark-accent-primary);
+    --dark-special-button-hover-bg: var(--dark-accent-hover);
+    --dark-decrypt-button-bg: #c0392b; /* Keep a distinct warning/error red */
+    --dark-decrypt-button-hover-bg: #a93226;
+}
+
 /* General Styles */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+#matrix-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Keep it in the background */
+    /* Fallback background color if JS fails or for initial load */
+    background-color: #0f0f0f;
+}
+
 body {
-    font-family: 'Roboto', Arial, sans-serif;
-    background-color: #f0f4f8;
-    color: #333;
+    font-family: 'Fira Code', 'Courier New', monospace; /* Updated font stack */
+    background-color: transparent; /* Canvas will draw the background */
+    color: var(--dark-text-primary);
     margin: 0;
-    padding: 0;
+    padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    border-radius: 8px;
+    padding-top: 50px;
+    line-height: 1.6;
 }
 
+/* .cipher-title class removed as it's no longer used */
+
 .container {
-    background-color: #fff;
+    background-color: var(--dark-bg-secondary);
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px var(--dark-shadow-color); /* Enhanced shadow */
     padding: 40px;
     max-width: 800px;
     width: 100%;
-    margin: 20px;
+    margin: 20px auto;
+    border: 1px solid var(--dark-border-color); /* Added border for container */
 }
 
 h1, h2, h3 {
     font-weight: 600;
-    color: #2c3e50;
+    color: var(--dark-text-primary);
     text-align: center;
+    margin-top: 1.5em;
+    margin-bottom: 0.75em;
+    line-height: 1.2;
 }
 
 h1 {
     font-size: 2.5rem;
-    margin-bottom: 20px;
+    margin-top: 0;
+    color: var(--dark-accent-primary); /* Make H1 stand out */
+}
+
+h2 {
+    font-size: 2rem;
 }
 
 h3 {
-    margin-top: 20px;
-    font-size: 1.2rem;
-    margin-bottom: 10px;
+    font-size: 1.5rem;
 }
 
-input[type="number"], input[type="text"] {
+p, label {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 0.5em;
+    color: var(--dark-text-secondary);
+}
+
+label {
+    font-weight: bold;
+    margin-top: 10px;
+    display: block;
+    color: var(--dark-text-primary);
+}
+
+input[type="number"], input[type="text"], textarea, select {
     padding: 10px;
     font-size: 1rem;
     border-radius: 5px;
-    border: 1px solid #ccc;
+    background-color: var(--dark-input-bg);
+    color: var(--dark-input-text);
+    border: 1px solid var(--dark-border-color);
     margin-bottom: 10px;
     box-sizing: border-box;
+    width: 100%;
+    box-shadow: inset 0 1px 3px var(--dark-shadow-color); /* Inner shadow for inputs */
+    transition: border-color 0.2s, box-shadow 0.2s;
+    margin: 10px 0;
 }
 
-input[type="number"]:focus, input[type="text"]:focus {
+input[type="number"]:focus, input[type="text"]:focus, textarea:focus, select:focus {
     outline: none;
-    border-color: #3498db;
-    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+    border-color: var(--dark-accent-primary);
+    box-shadow: 0 0 8px var(--dark-accent-primary), inset 0 1px 3px var(--dark-shadow-color);
+}
+
+textarea {
+    resize: none;
 }
 
 button {
-    background-color: #3498db;
-    color: white;
-    border: none;
+    background-color: var(--dark-button-bg);
+    color: var(--dark-button-text);
+    border: 1px solid var(--dark-button-bg);
     padding: 10px 20px;
     font-size: 1.1rem;
     border-radius: 5px;
     cursor: pointer;
     margin-top: 20px;
     width: 100%;
+    font-weight: bold;
+    transition: background-color 0.2s, transform 0.2s ease-out, box-shadow 0.2s ease-out, border-color 0.2s;
 }
 
 button:hover {
-    background-color: #2980b9;
+    background-color: var(--dark-button-hover-bg);
+    border-color: var(--dark-button-hover-bg);
+    transform: scale(1.03); /* Slightly reduced hover scale */
+    box-shadow: 0 6px 12px var(--dark-shadow-color); /* Enhanced hover shadow */
+}
+
+button:active {
+    transform: scale(0.97); /* Slightly reduced active scale */
+    box-shadow: 0 2px 4px var(--dark-shadow-color);
+}
+
+button.decrypt-btn {
+    background-color: var(--dark-decrypt-button-bg);
+    border-color: var(--dark-decrypt-button-bg);
+}
+
+button.decrypt-btn:hover {
+    background-color: var(--dark-decrypt-button-hover-bg);
+    border-color: var(--dark-decrypt-button-hover-bg);
+}
+
+.expand-btn, .collapsible { /* Grouping similar special buttons */
+    background-color: var(--dark-special-button-bg);
+    border-color: var(--dark-special-button-bg);
+}
+
+.expand-btn:hover, .collapsible:hover {
+    background-color: var(--dark-special-button-hover-bg);
+    border-color: var(--dark-special-button-hover-bg);
+}
+
+/* Animation for general page content sections */
+.content-fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInRise 0.6s ease-out forwards;
+    animation-delay: 0.2s; /* Optional delay */
+}
+
+@keyframes fadeInRise {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animation for dynamically loaded result sections */
+.result-fade-in { /* Renamed from .fade-in for clarity */
+    opacity: 0; /* Ensure initial state is set if class is added dynamically */
+    animation: fadeInAnimation 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeInAnimation { /* Kept if different, or could use fadeInRise too */
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.compact-button {
+    width: auto;
+    padding: 8px 12px;
+    margin: 5px 1%;
+}
+
+.output {
+    background-color: var(--dark-input-bg); /* Consistent with other input/data display areas */
+    padding: 15px;
+    border-radius: 5px;
+    border-left: 5px solid var(--dark-accent-primary);
+    margin-top: 20px;
+    /* font-family will be inherited from body */
+    line-height: 1.6;
+    color: var(--dark-text-primary);
+    border: 1px solid var(--dark-border-color);
+    box-shadow: 0 2px 8px var(--dark-shadow-color);
+    opacity: 0; /* Prepare for fade-in */
+}
+
+.output strong {
+    color: var(--dark-output-strong-color);
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid var(--dark-border-color);
+    margin: 20px 0;
 }
 
 .matrix-cell {
     padding: 10px;
     font-size: 1rem;
-    width: 60px;
+    width: 60px; /* Increased from 50px for better touch target / visual */
+    height: 50px; /* Increased from 40px */
     margin: 2px;
     text-align: center;
     border-radius: 5px;
-    border: 1px solid #ccc;
+    background-color: var(--dark-input-bg);
+    color: var(--dark-input-text);
+    border: 1px solid var(--dark-border-color);
     display: inline-block;
     margin-bottom: 10px;
+    transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
 }
 
 .matrix-cell:focus {
     outline: none;
-    border-color: #3498db;
-    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
-}
-
-select {
-    padding: 10px;
-    font-size: 1rem;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    margin-bottom: 20px;
-}
-
-.output {
-    background-color: #ecf0f1;
-    padding: 15px;
-    border-radius: 5px;
-    border-left: 5px solid #3498db;
-    margin-top: 20px;
-    font-family: 'Courier New', Courier, monospace;
-    line-height: 1.6;
-    color: #2c3e50;
-}
-
-.output strong {
-    color: #e74c3c;
-}
-
-hr {
-    border: 0;
-    border-top: 1px solid #ddd;
-    margin: 20px 0;
+    border-color: var(--dark-accent-primary);
+    box-shadow: 0 0 8px var(--dark-accent-primary);
+    background-color: var(--dark-bg-secondary);
 }
 
 #matrix-inputs {
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
-    justify-content: center;
+    justify-content: center; /* Centering matrix cells can look better */
+    margin-bottom: 15px;
 }
 
-#matrix-inputs input {
+#matrix-inputs input { /* This selector might be redundant if .matrix-cell is always used */
     text-align: center;
 }
 
-/* Responsiveness */
+@media (min-width: 768px) { /* This media query was for #matrix-inputs specifically */
+    #matrix-inputs {
+        /*flex-direction: row; /* This is default for flex items if not specified for main axis */
+        /* justify-content: center; /* or flex-start if preferred */
+    }
+}
+
+.matrix-container { /* This class is on the div#matrix-inputs */
+    /* display: flex; /* It's already flex via #matrix-inputs */
+    /* flex-direction: column; /* This would stack rows of inputs, not desired for matrix */
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.result-section {
+    background-color: var(--dark-input-bg);
+    border: 1px solid var(--dark-border-color);
+    border-radius: 4px;
+    padding: 15px;
+    margin-top: 20px;
+    text-align: center;
+    opacity: 0; /* Prepare for fade-in */
+    color: var(--dark-text-primary);
+}
+
+.result-section h2 {
+    color: var(--dark-accent-primary);
+    margin-top: 0;
+}
+
+.collapse-section {
+    margin-top: 20px;
+}
+
+.tables-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.table-wrapper {
+    width: 48%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    border: 1px solid var(--dark-border-color);
+    padding: 10px;
+    text-align: center;
+    background-color: var(--dark-input-bg);
+    color: var(--dark-text-primary);
+}
+
+th { /* Table headers distinct */
+    background-color: var(--dark-bg-secondary);
+    color: var(--dark-accent-primary);
+    font-weight: bold;
+}
+
+.collapse-content {
+    padding: 15px;
+    display: none;
+    overflow: hidden;
+    background-color: var(--dark-bg-secondary);
+    border-radius: 5px;
+    margin-top: 10px;
+    border: 1px solid var(--dark-border-color);
+}
+
+.matrix, .ciphertext, .digraphs {
+    /* font-family will be inherited from body */
+    white-space: pre;
+    background-color: var(--dark-input-bg);
+    color: var(--dark-text-primary);
+    padding: 10px;
+    border: 1px solid var(--dark-border-color);
+    border-radius: 4px;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.result-box {
+    background-color: var(--dark-input-bg);
+    border: 1px solid var(--dark-border-color);
+    border-radius: 4px;
+    padding: 15px;
+    margin-top: 20px;
+    opacity: 0; /* Prepare for fade-in */
+    color: var(--dark-text-primary);
+}
+
+.ciphertext {
+    font-weight: bold;
+    color: var(--dark-green-accent);
+    margin-top: 10px;
+    /* font-family will be inherited */
+}
+
+.rail {
+    /* font-family will be inherited */
+    white-space: pre;
+    margin-bottom: 5px;
+    color: var(--dark-text-secondary);
+}
+
+/* Responsiveness - keeping the most encompassing ones from original Hii.css */
 @media (max-width: 768px) {
     .container {
         padding: 20px;
     }
 
-    input[type="number"], input[type="text"], button {
+    input[type="number"], input[type="text"], textarea, select, button {
         font-size: 0.9rem;
     }
 
     h1 {
         font-size: 2rem;
     }
+    h2 {
+        font-size: 1.75rem;
+    }
+    h3 {
+        font-size: 1.25rem;
+    }
+    .tables-container {
+        flex-direction: column;
+    }
+    .table-wrapper {
+        width: 100%;
+        margin-bottom: 15px;
+    }
 }
 
 @media (max-width: 500px) {
     h1 {
+        font-size: 1.75rem;
+    }
+    h2 {
         font-size: 1.5rem;
     }
-
-    input[type="number"], input[type="text"] {
+    h3 {
+        font-size: 1.15rem;
+    }
+    input[type="number"], input[type="text"], textarea, select {
         width: 100%;
     }
 
@@ -155,4 +447,84 @@ hr {
         font-size: 1rem;
         padding: 15px;
     }
+    .compact-button {
+        width: 100%; /* Make compact buttons full width on small mobile */
+        margin: 5px 0;
+    }
+}
+
+/* Hill Cipher Page Specific Layout */
+.hill-main-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 0 20px 20px 20px;
+}
+
+.hill-section {
+    background-color: var(--dark-bg-secondary); /* Should match .container or be distinct if preferred */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px var(--dark-shadow-color);
+    width: 100%;
+    border: 1px solid var(--dark-border-color);
+}
+
+.hill-section h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: var(--dark-accent-primary);
+    font-size: 1.3rem; /* Specific font size for section titles */
+}
+.hill-section h2 { /* For the output section title */
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: var(--dark-accent-primary);
+    font-size: 1.3rem; /* Consistent with h3 in other sections */
+}
+
+.hill-config-section {
+    flex: 1 1 100%;
+}
+
+.hill-plaintext-section,
+.hill-ciphertext-section {
+    flex: 1 1 calc(50% - 10px); /* Each takes half minus gap */
+    min-width: 280px; /* Ensure they don't get too squished */
+}
+
+.hill-actions-section {
+    flex-basis: 100%;
+    text-align: center;
+}
+
+.hill-actions-section button {
+    margin: 5px 10px; /* More horizontal margin */
+    width: auto;
+    padding: 10px 25px; /* More padding for primary actions */
+}
+
+.hill-output-section {
+    flex-basis: 100%;
+}
+
+/* Responsive adjustments for Hill layout */
+@media (max-width: 767px) { /* Max for typical mobile portrait */
+    .hill-plaintext-section,
+    .hill-ciphertext-section {
+        flex: 1 1 100%; /* Stack them on smaller screens */
+    }
+}
+
+/* Styling for matrix inputs (div#matrix-inputs) already has some styles */
+/* Ensure .matrix-container (which is #matrix-inputs) specific styles are good */
+.matrix-container { /* This is #matrix-inputs */
+    justify-content: flex-start; /* Align cells to the left */
+    gap: 8px; /* Slightly larger gap for matrix cells */
+}
+/* .matrix-cell styles are already defined and should adapt,
+   but we ensure their width/height are suitable for this layout */
+.matrix-cell {
+    width: 55px; /* Adjusted for better fit if many cells */
+    height: 45px;
 }

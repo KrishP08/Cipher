@@ -89,6 +89,8 @@ function runHillCipher(mode) {
     const keyMatrix = getKeyMatrix(matrixSize);
     let outputDiv = document.getElementById('output');
     outputDiv.innerHTML = '';  // Clear previous output
+    outputDiv.classList.remove('result-fade-in'); // Remove class if already present
+    void outputDiv.offsetWidth; // Trigger reflow
 
     if (mode === 'encrypt') {
         // Encryption logic
@@ -147,6 +149,7 @@ function runHillCipher(mode) {
 
         outputDiv.innerHTML += `<strong>Final Decrypted Text: ${decryptedText}</strong>`;
     }
+    outputDiv.classList.add('result-fade-in'); // Add animation class after content is set
 }
 /*
 const menuBtn = document.querySelector('.menu-btn');
@@ -156,9 +159,6 @@ menuBtn.addEventListener('click', function() {
     navMenu.classList.toggle('active');
 });
 */
-document.querySelector('.menu-btn').addEventListener('click', function() {
-    document.querySelector('.sidebar').classList.toggle('open');
-});
 function generateRandomKeyMatrix() {
     const matrixSize = parseInt(document.getElementById("matrix-size").value);
     

@@ -51,7 +51,11 @@ document.getElementById('cipherForm').addEventListener('submit', function(event)
     fence.forEach(rail => {
         fenceContainer.innerHTML += `<div class="rail">${rail.join(' ')}</div>`;
     });
-    document.getElementById('result').style.display = 'block'; // Show the result section
+    const resultDiv = document.getElementById('result');
+    resultDiv.style.display = 'block'; // Show the result section
+    resultDiv.classList.remove('result-fade-in');
+    void resultDiv.offsetWidth;
+    resultDiv.classList.add('result-fade-in');
 });
 /*
 const menuBtn = document.querySelector('.menu-btn');
@@ -61,6 +65,3 @@ menuBtn.addEventListener('click', function() {
     navMenu.classList.toggle('active');
 });
 */
-document.querySelector('.menu-btn').addEventListener('click', function() {
-    document.querySelector('.sidebar').classList.toggle('open');
-});
