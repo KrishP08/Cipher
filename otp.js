@@ -139,7 +139,10 @@ document.getElementById('cipherForm').addEventListener('submit', function(event)
 function displayOutput(outputHtml) {
     const outputDiv = document.getElementById('output');
     outputDiv.innerHTML = outputHtml;
-    outputDiv.style.display = 'block';
+    outputDiv.style.display = 'block'; // Ensure it's block before animation
+    outputDiv.classList.remove('fade-in'); // Remove class if already present
+    void outputDiv.offsetWidth; // Trigger reflow
+    outputDiv.classList.add('fade-in'); // Add animation class
 
     const collapsibles = document.getElementsByClassName("collapsible");
     for (let i = 0; i < collapsibles.length; i++) {
@@ -159,9 +162,6 @@ menuBtn.addEventListener('click', function() {
     navMenu.classList.toggle('active');
 });
 */
-document.querySelector('.menu-btn').addEventListener('click', function() {
-    document.querySelector('.sidebar').classList.toggle('open');
-});
 function generateRandomKey() {
     const plaintext = document.getElementById('plaintext').value.toLowerCase().replace(/\s+/g, ''); // Remove spaces from plaintext
     if (!plaintext) {
