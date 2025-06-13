@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="nav.css">
 </head>
 <body>
+    <div id="particles-js"></div>
     <nav>
         <button class="menu-btn">&#9776;</button> <!-- Hamburger button -->
         <ul>
@@ -28,32 +29,44 @@
             <li><a href="CaesarCipher.html">Caesar Cipher</a></li>
         </ul>
     </div>
-    <h1>Hill Cipher</h1>
+    <h1 class="cipher-title">Hill Cipher</h1>
 
-    <h3>Enter Matrix Size:</h3>
-    <input type="number" id="matrix-size" value="3" min="2" max="10" onchange="generateMatrixInputs()">
+    <div class="hill-main-wrapper">
+        <div class="hill-section hill-config-section">
+            <h3>Key Configuration</h3>
+            <label for="matrix-size">Enter Matrix Size:</label>
+            <input type="number" id="matrix-size" value="3" min="2" max="10" onchange="generateMatrixInputs()">
+
+            <label for="matrix-inputs">Enter the Key Matrix:</label>
+            <div id="matrix-inputs" class="matrix-container"></div>
+
+            <button onclick="generateRandomKeyMatrix()">Generate Random Key</button>
+        </div>
     
-    <h3>Enter the Key Matrix:</h3>
-    <div id="matrix-inputs" class="matrix-container"></div>
-   
-    <h3>Generate Random Key Matrix:</h3>
-    <button onclick="generateRandomKeyMatrix()">Generate Random Key</button>
-    
-    <h3>Enter Plaintext (auto-padded):</h3>
-    <input type="text" id="plaintext" placeholder="Enter plaintext">
-    <h3>Generate Random Plaintext:</h3>
-    <button onclick="generateRandomPlaintext()">Generate Random Plaintext</button>
+        <div class="hill-section hill-plaintext-section">
+            <h3>Plaintext</h3>
+            <label for="plaintext">Enter Plaintext (auto-padded):</label>
+            <input type="text" id="plaintext" placeholder="Enter plaintext">
+            <button onclick="generateRandomPlaintext()">Generate Random Plaintext</button>
+        </div>
 
-    <h3>Enter Ciphertext:</h3>
-    <input type="text" id="ciphertext" placeholder="Enter ciphertext">
+        <div class="hill-section hill-ciphertext-section">
+            <h3>Ciphertext</h3>
+            <label for="ciphertext">Enter Ciphertext:</label>
+            <input type="text" id="ciphertext" placeholder="Enter ciphertext">
+        </div>
 
-    <div>
-        <button onclick="runHillCipher('encrypt')">Encrypt</button>
-        <button onclick="runHillCipher('decrypt')">Decrypt</button>
+        <div class="hill-section hill-actions-section">
+            <button onclick="runHillCipher('encrypt')">Encrypt</button>
+            <button onclick="runHillCipher('decrypt')">Decrypt</button>
+        </div>
+
+        <div class="hill-section hill-output-section">
+            <h2>Output:</h2>
+            <div class="output" id="output"></div>
+        </div>
     </div>
-
-    <h2>Output:</h2>
-    <div class="output" id="output"></div>
+    <script src="particles.min.js"></script>
     <script src="hill.js"></script>
     <script src="shared.js" defer></script>
 

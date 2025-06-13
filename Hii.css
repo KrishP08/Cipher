@@ -1,3 +1,47 @@
+:root {
+    /* Light Theme (Original) - Prefix with light- or keep as is for default */
+    --bg-primary: #f0f4f8;
+    --bg-secondary: #fff;
+    --text-primary: #333;
+    --text-secondary: #2c3e50; /* Was used for headings and some outputs */
+    --accent-primary: #007bff; /* Primary blue */
+    --accent-hover: #0056b3; /* Darker blue for hover */
+    --border-color: #ccc;
+    --input-bg: #fff;
+    --input-text: #333;
+    --button-bg: #3498db; /* Default button blue */
+    --button-text: #ffffff;
+    --button-hover-bg: #2980b9;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --output-strong-color: #C0392B; /* Darker red from previous step */
+    --green-accent: #006400; /* Darker green from previous step */
+    --special-button-bg: #3A7BC2; /* For .expand-btn */
+    --special-button-hover-bg: #2c6aa0; /* For .expand-btn hover */
+    --decrypt-button-bg: #f44336;
+    --decrypt-button-hover-bg: #e53935;
+
+    /* Dark Theme Palette */
+    --dark-bg-primary: #1e1e1e;
+    --dark-bg-secondary: #2d2d2d;
+    --dark-text-primary: #e0e0e0;
+    --dark-text-secondary: #b0b0b0;
+    --dark-accent-primary: #007bff; /* Keeping blue accent, can be adjusted */
+    --dark-accent-hover: #0056b3; /* Adjusted for dark theme */
+    --dark-border-color: #4a4a4a;
+    --dark-input-bg: #333333;
+    --dark-input-text: #e0e0e0;
+    --dark-button-bg: var(--dark-accent-primary);
+    --dark-button-text: #ffffff;
+    --dark-button-hover-bg: var(--dark-accent-hover); /* Should be a slightly different shade for hover */
+    --dark-shadow-color: rgba(0, 0, 0, 0.6); /* Darker shadows for dark theme */
+    --dark-output-strong-color: #ff8a80; /* Lighter red for dark background */
+    --dark-green-accent: #2ecc71; /* Lighter green for dark background */
+    --dark-special-button-bg: #007bff; /* Using accent for these too */
+    --dark-special-button-hover-bg: #0056b3;
+    --dark-decrypt-button-bg: #c0392b; /* A darker, less saturated red for dark theme */
+    --dark-decrypt-button-hover-bg: #a93226;
+}
+
 /* General Styles */
 *,
 *::before,
@@ -5,152 +49,158 @@
     box-sizing: border-box;
 }
 
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1; /* Crucial to keep it in the background */
+    background-color: var(--dark-bg-primary); /* Set the actual background color here */
+}
+
 body {
     font-family: 'Roboto', Arial, sans-serif;
-    background-color: #f0f4f8; /* Default background */
-    color: #333; /* Default text color */
+    background-color: transparent; /* Was var(--dark-bg-primary) */
+    color: var(--dark-text-primary);
     margin: 0;
-    padding: 20px; /* Default padding */
+    padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    border-radius: 8px; /* From index.html */
-    padding-top: 50px; /* Add space for the fixed navbar, from index.html */
-    line-height: 1.6; /* Base line-height for readability */
+    border-radius: 8px;
+    padding-top: 50px;
+    line-height: 1.6;
+}
+
+/* Styling for the main cipher title heading on each page */
+.cipher-title {
+    color: var(--dark-accent-primary);
+    text-align: center;
+    font-size: 2.2rem;
+    margin-top: 15px; /* Adjusted for body padding-top */
+    margin-bottom: 30px;
+    font-weight: 600;
 }
 
 .container {
-    background-color: #fff;
-    border-radius: 10px; /* Default border-radius */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Default shadow */
-    padding: 40px; /* Default padding */
-    max-width: 800px; /* Default max-width */
+    background-color: var(--dark-bg-secondary);
+    border-radius: 10px;
+    box-shadow: 0 4px 12px var(--dark-shadow-color); /* Enhanced shadow */
+    padding: 40px;
+    max-width: 800px;
     width: 100%;
-    margin: 20px auto; /* Centering and margin */
+    margin: 20px auto;
+    border: 1px solid var(--dark-border-color); /* Added border for container */
 }
 
 h1, h2, h3 {
-    font-weight: 600; /* Default font-weight */
-    color: #2c3e50; /* Default color */
+    font-weight: 600;
+    color: var(--dark-text-primary);
     text-align: center;
-    margin-top: 1.5em; /* Standardized top margin */
-    margin-bottom: 0.75em; /* Standardized bottom margin */
-    line-height: 1.2; /* Tighter line-height for headings */
+    margin-top: 1.5em;
+    margin-bottom: 0.75em;
+    line-height: 1.2;
 }
 
 h1 {
-    font-size: 2.5rem; /* Default font-size */
-    margin-top: 0; /* Often page titles don't need top margin if header/nav is present */
+    font-size: 2.5rem;
+    margin-top: 0;
+    color: var(--dark-accent-primary); /* Make H1 stand out */
 }
 
 h2 {
-    font-size: 2rem; /* Defined font size for h2 */
-    /* color from Playfair.html & CaesarCipher.html - Keep default or decide specific? */
-    /* For now, keep general styling from Hii.css */
+    font-size: 2rem;
 }
 
 h3 {
-    font-size: 1.5rem; /* Slightly larger h3 for better hierarchy */
+    font-size: 1.5rem;
 }
 
-p, label { /* General styling for paragraphs and labels */
+p, label {
     font-size: 1rem;
     line-height: 1.6;
-    margin-bottom: 0.5em; /* Spacing below paragraphs/labels */
+    margin-bottom: 0.5em;
+    color: var(--dark-text-secondary);
 }
 
-label { /* Specific label styling from before, maintained */
+label {
     font-weight: bold;
     margin-top: 10px;
-    display: block; /* From Railfence, otp */
+    display: block;
+    color: var(--dark-text-primary);
 }
-
 
 input[type="number"], input[type="text"], textarea, select {
     padding: 10px;
     font-size: 1rem;
-    border-radius: 5px; /* Default border-radius */
-    border: 1px solid #ccc; /* Default border */
-    margin-bottom: 10px; /* Default margin */
+    border-radius: 5px;
+    background-color: var(--dark-input-bg);
+    color: var(--dark-input-text);
+    border: 1px solid var(--dark-border-color);
+    margin-bottom: 10px;
     box-sizing: border-box;
-    width: 100%; /* Common style */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* From index.html, Railfence, otp */
-    transition: border-color 0.2s, box-shadow 0.2s; /* Added box-shadow to transition */
-    margin: 10px 0; /* from index.html, Railfence, otp - can override specific cases if needed */
+    width: 100%;
+    box-shadow: inset 0 1px 3px var(--dark-shadow-color); /* Inner shadow for inputs */
+    transition: border-color 0.2s, box-shadow 0.2s;
+    margin: 10px 0;
 }
 
 input[type="number"]:focus, input[type="text"]:focus, textarea:focus, select:focus {
     outline: none;
-    border-color: #3498db; /* Default focus color */
-    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5); /* Default focus shadow */
+    border-color: var(--dark-accent-primary);
+    box-shadow: 0 0 8px var(--dark-accent-primary), inset 0 1px 3px var(--dark-shadow-color);
 }
 
 textarea {
-    resize: none; /* Prevents resizing - from Railfence.html */
+    resize: none;
 }
 
 button {
-    background-color: #3498db; /* Default background */
-    color: white; /* Default text color */
-    border: none;
-    padding: 10px 20px; /* Default padding */
-    font-size: 1.1rem; /* Default font-size */
-    border-radius: 5px; /* Default border-radius */
+    background-color: var(--dark-button-bg);
+    color: var(--dark-button-text);
+    border: 1px solid var(--dark-button-bg);
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    border-radius: 5px;
     cursor: pointer;
-    margin-top: 20px; /* Default margin-top */
-    width: 100%; /* Default width */
-    font-weight: bold; /* From index.html, Railfence, otp */
-    transition: background-color 0.2s, transform 0.2s ease-out, box-shadow 0.2s ease-out; /* Added transform and box-shadow */
+    margin-top: 20px;
+    width: 100%;
+    font-weight: bold;
+    transition: background-color 0.2s, transform 0.2s ease-out, box-shadow 0.2s ease-out, border-color 0.2s;
 }
 
 button:hover {
-    background-color: #2980b9; /* Default hover background */
-    transform: scale(1.05); /* Slight scale on hover */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+    background-color: var(--dark-button-hover-bg);
+    border-color: var(--dark-button-hover-bg);
+    transform: scale(1.03); /* Slightly reduced hover scale */
+    box-shadow: 0 6px 12px var(--dark-shadow-color); /* Enhanced hover shadow */
 }
 
 button:active {
-    transform: scale(0.98); /* Slight shrink on click */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Reduce shadow on click */
+    transform: scale(0.97); /* Slightly reduced active scale */
+    box-shadow: 0 2px 4px var(--dark-shadow-color);
 }
 
-/* Specific button styles that were common */
-/* Ensure transitions apply to specific buttons too if they override background-color */
-button.decrypt-btn { /* From CaesarCipher.html */
-    background-color: #f44336;
-    /* transition is inherited */
+button.decrypt-btn {
+    background-color: var(--dark-decrypt-button-bg);
+    border-color: var(--dark-decrypt-button-bg);
 }
 
-button.decrypt-btn:hover { /* From CaesarCipher.html */
-    background-color: #e53935;
-    transform: scale(1.05); /* Ensure hover effect is consistent */
+button.decrypt-btn:hover {
+    background-color: var(--dark-decrypt-button-hover-bg);
+    border-color: var(--dark-decrypt-button-hover-bg);
 }
 
-.expand-btn { /* From CaesarCipher.html - ensure it inherits general button transitions or define them */
-    background-color: #4A90E2; /* Already defined */
-    /* transition is inherited */
+.expand-btn, .collapsible { /* Grouping similar special buttons */
+    background-color: var(--dark-special-button-bg);
+    border-color: var(--dark-special-button-bg);
 }
 
-.expand-btn { /* From CaesarCipher.html - ensure it inherits general button transitions or define them */
-    background-color: #3A7BC2; /* Darkened blue for better contrast */
-    /* transition is inherited */
-}
-
-.expand-btn:hover { /* From CaesarCipher.html */
-    background-color: #2c6aa0; /* Darker hover for the new blue */
-    transform: scale(1.05); /* Ensure hover effect is consistent */
-}
-
-.collapsible { /* From otp.html - ensure it inherits general button transitions or define them */
-    background-color: #007bff; /* Already defined */
-     /* transition is inherited if we make it a button, or add explicitly if it's not a button element */
-     /* Assuming .collapsible is a <button> or has button role for these effects */
-}
-
-.collapsible:hover {
-    background-color: #0056b3; /* Example hover for collapsible */
-    transform: scale(1.02); /* More subtle scale for full-width items */
+.expand-btn:hover, .collapsible:hover {
+    background-color: var(--dark-special-button-hover-bg);
+    border-color: var(--dark-special-button-hover-bg);
 }
 
 /* Animation for result sections */
@@ -163,203 +213,179 @@ button.decrypt-btn:hover { /* From CaesarCipher.html */
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Styles for smaller buttons (e.g. index.html encrypt/decrypt, CaesarÇipher encrypt/decrypt) */
-/* These might need more specific selectors if they conflict */
-.compact-button { /* Made up class for a more specific selector if needed */
-    width: auto; /* Compact button size from index.html */
-    padding: 8px 12px; /* from index.html */
-    margin: 5px 1%; /* From CaesarCipher.html - for side-by-side buttons */
+.compact-button {
+    width: auto;
+    padding: 8px 12px;
+    margin: 5px 1%;
 }
 
-
 .output {
-    background-color: #ecf0f1; /* Default background */
+    background-color: var(--dark-input-bg); /* Consistent with other input/data display areas */
     padding: 15px;
     border-radius: 5px;
-    border-left: 5px solid #3498db; /* Default border-left */
+    border-left: 5px solid var(--dark-accent-primary);
     margin-top: 20px;
     font-family: 'Courier New', Courier, monospace;
     line-height: 1.6;
-    color: #2c3e50; /* Default text color */
-    border: 1px solid #ced4da; /* From index.html, Railfence, otp */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* From index.html, Railfence, otp */
+    color: var(--dark-text-primary);
+    border: 1px solid var(--dark-border-color);
+    box-shadow: 0 2px 8px var(--dark-shadow-color);
     opacity: 0; /* Prepare for fade-in */
 }
 
-.output strong { /* From original Hii.css */
-    color: #C0392B; /* Darker red for better contrast */
+.output strong {
+    color: var(--dark-output-strong-color);
 }
 
-hr { /* From original Hii.css */
+hr {
     border: 0;
-    border-top: 1px solid #ddd;
+    border-top: 1px solid var(--dark-border-color);
     margin: 20px 0;
 }
 
-/* Matrix specific styles from index.html and original Hii.css */
 .matrix-cell {
-    padding: 10px; /* Hii.css original had more padding */
+    padding: 10px;
     font-size: 1rem;
-    width: 60px;
+    width: 60px; /* Increased from 50px for better touch target / visual */
+    height: 50px; /* Increased from 40px */
     margin: 2px;
     text-align: center;
-    border-radius: 5px; /* Hii.css original */
-    border: 1px solid #ccc; /* Hii.css original */
-    display: inline-block; /* Hii.css original */
-    margin-bottom: 10px; /* Hii.css original */
-    background-color: #f8f9fa; /* index.html */
+    border-radius: 5px;
+    background-color: var(--dark-input-bg);
+    color: var(--dark-input-text);
+    border: 1px solid var(--dark-border-color);
+    display: inline-block;
+    margin-bottom: 10px;
+    transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
 }
 
 .matrix-cell:focus {
     outline: none;
-    border-color: #007bff; /* index.html had a different focus color */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Keep Hii.css original for consistency, adjusted alpha for visibility */
-    background-color: #e2e6ea; /* index.html */
-    transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s; /* Added transitions for matrix cells */
+    border-color: var(--dark-accent-primary);
+    box-shadow: 0 0 8px var(--dark-accent-primary);
+    background-color: var(--dark-bg-secondary);
 }
 
 #matrix-inputs {
     display: flex;
     flex-wrap: wrap;
-    gap: 5px; /* Hii.css original */
-    justify-content: center; /* Hii.css original */
+    gap: 5px;
+    justify-content: center; /* Centering matrix cells can look better */
+    margin-bottom: 15px;
 }
 
-#matrix-inputs input { /* From Hii.css */
+#matrix-inputs input { /* This selector might be redundant if .matrix-cell is always used */
     text-align: center;
 }
 
-@media (min-width: 768px) { /* From index.html */
+@media (min-width: 768px) { /* This media query was for #matrix-inputs specifically */
     #matrix-inputs {
-        flex-direction: row;
+        /*flex-direction: row; /* This is default for flex items if not specified for main axis */
+        /* justify-content: center; /* or flex-start if preferred */
     }
 }
 
-.matrix-container { /* From index.html */
-    display: flex;
-    flex-direction: column;
+.matrix-container { /* This class is on the div#matrix-inputs */
+    /* display: flex; /* It's already flex via #matrix-inputs */
+    /* flex-direction: column; /* This would stack rows of inputs, not desired for matrix */
     gap: 10px;
     margin-bottom: 20px;
 }
 
-
-/* Styles from CaesarCipher.html */
-/* Styles from CaesarCipher.html (label moved up) */
-.result-section { /* From CaesarCipher.html */
-    background-color: #f1f1f1;
-    border: 1px solid #ccc;
+.result-section {
+    background-color: var(--dark-input-bg);
+    border: 1px solid var(--dark-border-color);
     border-radius: 4px;
     padding: 15px;
     margin-top: 20px;
     text-align: center;
     opacity: 0; /* Prepare for fade-in */
+    color: var(--dark-text-primary);
 }
 
-.result-section h2 { /* From CaesarCipher.html */
-    color: #357ABD; /* Darker blue for better contrast */
+.result-section h2 {
+    color: var(--dark-accent-primary);
     margin-top: 0;
 }
 
-.collapse-section { /* From CaesarCipher.html */
+.collapse-section {
     margin-top: 20px;
 }
 
-.tables-container { /* From CaesarCipher.html */
+.tables-container {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
 }
 
-.table-wrapper { /* From CaesarCipher.html */
+.table-wrapper {
     width: 48%;
 }
 
-table { /* From CaesarCipher.html */
+table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
 }
 
-th, td { /* From CaesarCipher.html */
-    border: 1px solid #ccc;
+th, td {
+    border: 1px solid var(--dark-border-color);
     padding: 10px;
     text-align: center;
-    background-color: #f9f9f9;
+    background-color: var(--dark-input-bg);
+    color: var(--dark-text-primary);
 }
 
-.collapse-content { /* From CaesarCipher.html & otp.html */
-    padding: 0 18px; /* otp.html */
+th { /* Table headers distinct */
+    background-color: var(--dark-bg-secondary);
+    color: var(--dark-accent-primary);
+    font-weight: bold;
+}
+
+.collapse-content {
+    padding: 15px;
     display: none;
     overflow: hidden;
-    background-color: #f1f1f1;
-    border-radius: 5px; /* otp.html */
-    margin-top: 10px; /* otp.html */
+    background-color: var(--dark-bg-secondary);
+    border-radius: 5px;
+    margin-top: 10px;
+    border: 1px solid var(--dark-border-color);
 }
 
-.expand-btn { /* From CaesarCipher.html */
-    background-color: #4A90E2;
-    color: white;
-    padding: 10px;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    margin-top: 20px;
-    border-radius: 4px;
-}
-
-.expand-btn:hover { /* From CaesarCipher.html */
-    background-color: #357ABD;
-}
-
-
-/* Styles from Playfair.html */
-.matrix, .ciphertext, .digraphs { /* .matrix was also in original Hii.css, but for cells. This is a display box. */
+.matrix, .ciphertext, .digraphs {
     font-family: monospace;
     white-space: pre;
-    background-color: #f9f9f9;
+    background-color: var(--dark-input-bg);
+    color: var(--dark-text-primary);
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--dark-border-color);
     border-radius: 4px;
-    display: inline-block; /* This might conflict with .output if used on same element */
+    display: inline-block;
     margin-top: 10px;
 }
 
-.result-box { /* From Playfair.html */
-    background-color: #f1f1f1;
-    border: 1px solid #ccc;
+.result-box {
+    background-color: var(--dark-input-bg);
+    border: 1px solid var(--dark-border-color);
     border-radius: 4px;
     padding: 15px;
     margin-top: 20px;
     opacity: 0; /* Prepare for fade-in */
+    color: var(--dark-text-primary);
 }
 
-/* Styles from Railfence.html */
-.ciphertext { /* This class is used in Playfair and Railfence for different text displays */
+.ciphertext {
     font-weight: bold;
-    color: #006400; /* Darker green for better contrast */
+    color: var(--dark-green-accent);
     margin-top: 10px;
 }
 
-.rail { /* From Railfence.html */
+.rail {
     font-family: monospace;
     white-space: pre;
     margin-bottom: 5px;
+    color: var(--dark-text-secondary);
 }
-
-/* Styles from otp.html */
-.collapsible { /* From otp.html */
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    padding: 10px;
-    width: 100%;
-    border: none;
-    text-align: left;
-    outline: none;
-    font-size: 16px;
-    border-radius: 5px;
-}
-
 
 /* Responsiveness - keeping the most encompassing ones from original Hii.css */
 @media (max-width: 768px) {
@@ -374,19 +400,117 @@ th, td { /* From CaesarCipher.html */
     h1 {
         font-size: 2rem;
     }
+    h2 {
+        font-size: 1.75rem;
+    }
+    h3 {
+        font-size: 1.25rem;
+    }
+    .tables-container {
+        flex-direction: column;
+    }
+    .table-wrapper {
+        width: 100%;
+        margin-bottom: 15px;
+    }
 }
 
 @media (max-width: 500px) {
     h1 {
+        font-size: 1.75rem;
+    }
+    h2 {
         font-size: 1.5rem;
     }
-
-    input[type="number"], input[type="text"], textarea, select { /* Ensure all input types are covered */
+    h3 {
+        font-size: 1.15rem;
+    }
+    input[type="number"], input[type="text"], textarea, select {
         width: 100%;
     }
 
     button {
         font-size: 1rem;
-        padding: 15px; /* More padding for smaller screens */
+        padding: 15px;
     }
+    .compact-button {
+        width: 100%; /* Make compact buttons full width on small mobile */
+        margin: 5px 0;
+    }
+}
+
+/* Hill Cipher Page Specific Layout */
+.hill-main-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 0 20px 20px 20px;
+}
+
+.hill-section {
+    background-color: var(--dark-bg-secondary); /* Should match .container or be distinct if preferred */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px var(--dark-shadow-color);
+    width: 100%;
+    border: 1px solid var(--dark-border-color);
+}
+
+.hill-section h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: var(--dark-accent-primary);
+    font-size: 1.3rem; /* Specific font size for section titles */
+}
+.hill-section h2 { /* For the output section title */
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: var(--dark-accent-primary);
+    font-size: 1.3rem; /* Consistent with h3 in other sections */
+}
+
+.hill-config-section {
+    flex: 1 1 100%;
+}
+
+.hill-plaintext-section,
+.hill-ciphertext-section {
+    flex: 1 1 calc(50% - 10px); /* Each takes half minus gap */
+    min-width: 280px; /* Ensure they don't get too squished */
+}
+
+.hill-actions-section {
+    flex-basis: 100%;
+    text-align: center;
+}
+
+.hill-actions-section button {
+    margin: 5px 10px; /* More horizontal margin */
+    width: auto;
+    padding: 10px 25px; /* More padding for primary actions */
+}
+
+.hill-output-section {
+    flex-basis: 100%;
+}
+
+/* Responsive adjustments for Hill layout */
+@media (max-width: 767px) { /* Max for typical mobile portrait */
+    .hill-plaintext-section,
+    .hill-ciphertext-section {
+        flex: 1 1 100%; /* Stack them on smaller screens */
+    }
+}
+
+/* Styling for matrix inputs (div#matrix-inputs) already has some styles */
+/* Ensure .matrix-container (which is #matrix-inputs) specific styles are good */
+.matrix-container { /* This is #matrix-inputs */
+    justify-content: flex-start; /* Align cells to the left */
+    gap: 8px; /* Slightly larger gap for matrix cells */
+}
+/* .matrix-cell styles are already defined and should adapt,
+   but we ensure their width/height are suitable for this layout */
+.matrix-cell {
+    width: 55px; /* Adjusted for better fit if many cells */
+    height: 45px;
 }
