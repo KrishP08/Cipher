@@ -261,14 +261,15 @@ hr {
     font-size: 1rem;
     width: 60px; /* Increased from 50px for better touch target / visual */
     height: 50px; /* Increased from 40px */
-    margin: 2px;
+    /* margin: 2px; /* Replaced by grid gap */
     text-align: center;
     border-radius: 5px;
     background-color: var(--dark-input-bg);
     color: var(--dark-input-text);
     border: 1px solid var(--dark-border-color);
-    display: inline-block;
-    margin-bottom: 10px;
+    /* display: inline-block; /* No longer needed with CSS Grid */
+    /* margin-bottom: 10px; /* Grid gap will handle spacing */
+    /* margin: 2px; /* Replaced by grid-gap */
     transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
 }
 
@@ -279,31 +280,31 @@ hr {
     background-color: var(--dark-bg-secondary);
 }
 
-#matrix-inputs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    justify-content: center; /* Centering matrix cells can look better */
-    margin-bottom: 15px;
+#matrix-inputs { /* This is also .matrix-container */
+    display: grid;
+    grid-template-columns: repeat(var(--matrix-size, 3), 45px); /* Default to 3 if var not set */
+    gap: 8px; /* Updated gap, preferred over cell margins */
+    justify-content: center; /* Center the grid if narrower than container */
+    margin-bottom: 20px; /* Consolidating margin from .matrix-container */
+    /* Removed flex properties, text-align for child inputs (handled by cells) */
 }
 
-#matrix-inputs input { /* This selector might be redundant if .matrix-cell is always used */
-    text-align: center;
+/* Redundant #matrix-inputs input and @media query can be removed if not needed for other purposes */
+/* For now, keeping them but commenting out content of @media if it's flex specific */
+#matrix-inputs input {
+    text-align: center; /* This is fine, though .matrix-cell also has it */
 }
 
-@media (min-width: 768px) { /* This media query was for #matrix-inputs specifically */
+@media (min-width: 768px) {
     #matrix-inputs {
-        /*flex-direction: row; /* This is default for flex items if not specified for main axis */
-        /* justify-content: center; /* or flex-start if preferred */
+        /* Flex-specific rules removed/commented if they were here */
+        /* Grid layout might not need specific changes here unless column count changes */
     }
 }
 
-.matrix-container { /* This class is on the div#matrix-inputs */
-    /* display: flex; /* It's already flex via #matrix-inputs */
-    /* flex-direction: column; /* This would stack rows of inputs, not desired for matrix */
-    gap: 10px;
-    margin-bottom: 20px;
-}
+/* .matrix-container rule can be effectively merged into #matrix-inputs as they are the same element */
+/* Removing the separate .matrix-container rule to avoid confusion if its properties are now in #matrix-inputs */
+
 
 .result-section {
     background-color: var(--dark-input-bg);
