@@ -57,7 +57,7 @@
     height: 100%;
     z-index: -1; /* Keep it in the background */
     /* Fallback background color if JS fails or for initial load */
-    background-color: #0f0f0f; 
+    background-color: #0f0f0f;
 }
 
 body {
@@ -99,11 +99,11 @@ h1, h2, h3 {
 
 h1 {
     font-size: 2.5rem;
-    margin-top: 0; 
+    margin-top: 0;
     color: var(--dark-accent-primary); /* Make H1 stand out */
 }
 
-h2 { 
+h2 {
     font-size: 2rem;
 }
 
@@ -119,8 +119,8 @@ p, label {
 }
 
 label {
-    font-weight: bold; 
-    margin-top: 10px; 
+    font-weight: bold;
+    margin-top: 10px;
     display: block;
     color: var(--dark-text-primary);
 }
@@ -153,7 +153,7 @@ textarea {
 button {
     background-color: var(--dark-button-bg);
     color: var(--dark-button-text);
-    border: 1px solid var(--dark-button-bg); 
+    border: 1px solid var(--dark-button-bg);
     padding: 10px 20px;
     font-size: 1.1rem;
     border-radius: 5px;
@@ -276,7 +276,7 @@ hr {
     outline: none;
     border-color: var(--dark-accent-primary);
     box-shadow: 0 0 8px var(--dark-accent-primary);
-    background-color: var(--dark-bg-secondary); 
+    background-color: var(--dark-bg-secondary);
 }
 
 #matrix-inputs {
@@ -301,23 +301,23 @@ hr {
 .matrix-container { /* This class is on the div#matrix-inputs */
     /* display: flex; /* It's already flex via #matrix-inputs */
     /* flex-direction: column; /* This would stack rows of inputs, not desired for matrix */
-    gap: 10px; 
+    gap: 10px;
     margin-bottom: 20px;
 }
 
 .result-section {
-    background-color: var(--dark-input-bg); 
+    background-color: var(--dark-input-bg);
     border: 1px solid var(--dark-border-color);
-    border-radius: 4px; 
-    padding: 15px; 
-    margin-top: 20px; 
+    border-radius: 4px;
+    padding: 15px;
+    margin-top: 20px;
     text-align: center;
     opacity: 0; /* Prepare for fade-in */
     color: var(--dark-text-primary);
 }
 
 .result-section h2 {
-    color: var(--dark-accent-primary); 
+    color: var(--dark-accent-primary);
     margin-top: 0;
 }
 
@@ -345,21 +345,21 @@ th, td {
     border: 1px solid var(--dark-border-color);
     padding: 10px;
     text-align: center;
-    background-color: var(--dark-input-bg); 
+    background-color: var(--dark-input-bg);
     color: var(--dark-text-primary);
 }
 
 th { /* Table headers distinct */
-    background-color: var(--dark-bg-secondary); 
+    background-color: var(--dark-bg-secondary);
     color: var(--dark-accent-primary);
     font-weight: bold;
 }
 
 .collapse-content {
-    padding: 15px; 
+    padding: 15px;
     display: none;
     overflow: hidden;
-    background-color: var(--dark-bg-secondary); 
+    background-color: var(--dark-bg-secondary);
     border-radius: 5px;
     margin-top: 10px;
     border: 1px solid var(--dark-border-color);
@@ -387,9 +387,9 @@ th { /* Table headers distinct */
     color: var(--dark-text-primary);
 }
 
-.ciphertext { 
+.ciphertext {
     font-weight: bold;
-    color: var(--dark-green-accent); 
+    color: var(--dark-green-accent);
     margin-top: 10px;
     /* font-family will be inherited */
 }
@@ -458,7 +458,7 @@ th { /* Table headers distinct */
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    padding: 0 20px 20px 20px; 
+    padding: 0 20px 20px 20px;
 }
 
 .hill-section {
@@ -466,14 +466,14 @@ th { /* Table headers distinct */
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px var(--dark-shadow-color);
-    width: 100%; 
+    width: 100%;
     border: 1px solid var(--dark-border-color);
 }
 
-.hill-section h3 { 
+.hill-section h3 {
     margin-top: 0;
     margin-bottom: 15px;
-    color: var(--dark-accent-primary); 
+    color: var(--dark-accent-primary);
     font-size: 1.3rem; /* Specific font size for section titles */
 }
 .hill-section h2 { /* For the output section title */
@@ -484,7 +484,7 @@ th { /* Table headers distinct */
 }
 
 .hill-config-section {
-    flex: 1 1 100%; 
+    flex: 1 1 100%;
 }
 
 .hill-plaintext-section,
@@ -495,12 +495,12 @@ th { /* Table headers distinct */
 
 .hill-actions-section {
     flex-basis: 100%;
-    text-align: center; 
+    text-align: center;
 }
 
 .hill-actions-section button {
     margin: 5px 10px; /* More horizontal margin */
-    width: auto; 
+    width: auto;
     padding: 10px 25px; /* More padding for primary actions */
 }
 
@@ -522,9 +522,12 @@ th { /* Table headers distinct */
     justify-content: flex-start; /* Align cells to the left */
     gap: 8px; /* Slightly larger gap for matrix cells */
 }
-/* .matrix-cell styles are already defined and should adapt,
-   but we ensure their width/height are suitable for this layout */
-.matrix-cell { 
-    width: 55px; /* Adjusted for better fit if many cells */
-    height: 45px;
+/* .matrix-cell styles are defined earlier, this is an override/adjustment for Hill Cipher page context */
+.matrix-cell {
+    width: 45px;    /* New width */
+    height: 45px;   /* New height - same as width */
+    padding: 5px;   /* Reduced padding for more input space */
+    line-height: normal; /* Ensure text is centered vertically */
+    /* font-size, margin, text-align, border-radius, border, background-color, color, box-sizing, display, transition
+       are inherited from the earlier .matrix-cell rule or global styles */
 }

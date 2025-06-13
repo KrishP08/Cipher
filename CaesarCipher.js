@@ -31,12 +31,9 @@ function performEncrypt() {
     const resultBox = document.getElementById("resultBox");
 
     resultBox.style.display = "block";
-
     resultBox.classList.remove('result-fade-in'); // Remove class if already present
     void resultBox.offsetWidth; // Trigger reflow
     resultBox.classList.add('result-fade-in'); // Add animation class
-
-    
     document.getElementById("result").textContent = encryptedMessage;
 
     populateAlphabetTables(shift);
@@ -50,11 +47,9 @@ function performDecrypt() {
     const resultBox = document.getElementById("resultBox");
 
     resultBox.style.display = "block";
-
     resultBox.classList.remove('result-fade-in'); // Remove class if already present
     void resultBox.offsetWidth; // Trigger reflow
     resultBox.classList.add('result-fade-in'); // Add animation class
-
     document.getElementById("result").textContent = decryptedMessage;
 
     populateAlphabetTables(-shift);
