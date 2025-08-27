@@ -59,6 +59,33 @@
             <h2>Decryption Steps:</h2>
             <pre id="decryptionResultContent"></pre>
         </div>
+
+        <!-- "How to Use" Section -->
+        <div class="how-to-use-section">
+            <button class="expand-btn" onclick="toggleHowToUse()">How to Use</button>
+            <div class="collapse-content" id="howToUseContent">
+                <h3>Welcome to the Playfair Cipher Tool!</h3>
+                <p>The Playfair cipher is a digraphic substitution cipher that encrypts pairs of letters (digraphs) instead of single letters.</p>
+
+                <h4>To Encrypt a Message:</h4>
+                <ol>
+                    <li><strong>Select Operation:</strong> Choose "Encrypt".</li>
+                    <li><strong>Enter a Key:</strong> Provide a keyword. The key square will be generated based on this. You can also generate a random key.</li>
+                    <li><strong>Enter Plaintext:</strong> Type the message you want to encrypt.</li>
+                    <li><strong>Click Submit:</strong> The encryption steps and the final ciphertext will be displayed.</li>
+                </ol>
+
+                <h4>To Decrypt a Message:</h4>
+                <ol>
+                    <li><strong>Select Operation:</strong> Choose "Decrypt".</li>
+                    <li><strong>Use the Original Key:</strong> Enter the same key that was used for encryption.</li>
+                    <li><strong>Enter Ciphertext:</strong> Paste the encrypted text into the "Text" field.</li>
+                    <li><strong>Click Submit:</strong> The decryption steps and the original message will be revealed.</li>
+                </ol>
+
+                <p><strong>Note:</strong> The Playfair cipher uses a 5x5 grid of letters. 'J' is typically treated as 'I'.</p>
+            </div>
+        </div>
     </div>
 
     <script src="pf.js"></script>

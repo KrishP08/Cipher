@@ -53,6 +53,31 @@
         <p id="result"></p>
     </div>
 
+    <!-- "How to Use" Section -->
+    <div class="how-to-use-section">
+        <button class="expand-btn" onclick="toggleHowToUse()">How to Use</button>
+        <div class="collapse-content" id="howToUseContent">
+            <h3>Welcome to the Caesar Cipher Tool!</h3>
+            <p>The Caesar cipher is a simple substitution cipher where each letter in the plaintext is shifted a certain number of places down or up the alphabet.</p>
+
+            <h4>To Encrypt a Message:</h4>
+            <ol>
+                <li><strong>Enter a Message:</strong> Type the text you want to encrypt into the "Message" field.</li>
+                <li><strong>Set a Shift Value:</strong> Choose an integer for the "Shift Value." This is your key.</li>
+                <li><strong>Click Encrypt:</strong> The encrypted message will appear in the "Result" box.</li>
+            </ol>
+
+            <h4>To Decrypt a Message:</h4>
+            <ol>
+                <li><strong>Enter the Ciphertext:</strong> Paste the encrypted text into the "Message" field.</li>
+                <li><strong>Use the Same Shift Value:</strong> Enter the original key used for encryption.</li>
+                <li><strong>Click Decrypt:</strong> The original message will be revealed.</li>
+            </ol>
+
+            <p><strong>Tip:</strong> You can use the "Show/Hide Alphabet Tables" button to see how the alphabet is shifted based on your key.</p>
+        </div>
+    </div>
+
     <!-- Collapsible Section -->
     <div class="collapse-section">
         <button class="expand-btn" onclick="toggleCollapse()">Show/Hide Alphabet Tables</button>

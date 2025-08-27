@@ -26,7 +26,14 @@
 // Function to encrypt and show results
 function performEncrypt() {
     const message = document.getElementById("message").value;
-    const shift = parseInt(document.getElementById("shift").value);
+    const shiftValue = document.getElementById("shift").value;
+
+    if (!message || !shiftValue) {
+        alert("Please enter a message and a shift value.");
+        return;
+    }
+
+    const shift = parseInt(shiftValue);
     const encryptedMessage = caesarCipher(message, shift);
     const resultBox = document.getElementById("resultBox");
 
@@ -42,7 +49,14 @@ function performEncrypt() {
 // Function to decrypt and show results
 function performDecrypt() {
     const message = document.getElementById("message").value;
-    const shift = parseInt(document.getElementById("shift").value);
+    const shiftValue = document.getElementById("shift").value;
+
+    if (!message || !shiftValue) {
+        alert("Please enter a message and a shift value.");
+        return;
+    }
+
+    const shift = parseInt(shiftValue);
     const decryptedMessage = caesarCipher(message, -shift);
     const resultBox = document.getElementById("resultBox");
 
@@ -94,4 +108,10 @@ function populateAlphabetTables(shift) {
 function toggleCollapse() {
     const collapseContent = document.getElementById("collapseContent");
     collapseContent.style.display = (collapseContent.style.display === "block") ? "none" : "block";
+}
+
+// Function to toggle the "How to Use" section
+function toggleHowToUse() {
+    const howToUseContent = document.getElementById("howToUseContent");
+    howToUseContent.style.display = (howToUseContent.style.display === "block") ? "none" : "block";
 }

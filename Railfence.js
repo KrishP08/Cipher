@@ -40,8 +40,14 @@ document.getElementById('cipherForm').addEventListener('submit', function(event)
     event.preventDefault(); // Prevent form submission
 
     const plaintext = document.getElementById('plaintext').value;
-    const rails = parseInt(document.getElementById('rails').value);
+    const railsValue = document.getElementById('rails').value;
 
+    if (!plaintext || !railsValue) {
+        alert("Please enter both plaintext and the number of rails.");
+        return;
+    }
+
+    const rails = parseInt(railsValue);
     const { ciphertext, fence } = railFenceEncrypt(plaintext, rails);
 
     // Display the results
@@ -65,3 +71,9 @@ menuBtn.addEventListener('click', function() {
     navMenu.classList.toggle('active');
 });
 */
+
+// Function to toggle the "How to Use" section
+function toggleHowToUse() {
+    const howToUseContent = document.getElementById("howToUseContent");
+    howToUseContent.style.display = (howToUseContent.style.display === "block") ? "none" : "block";
+}

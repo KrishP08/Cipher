@@ -86,6 +86,12 @@ document.getElementById('cipherForm').addEventListener('submit', function(event)
 
     const plaintext = document.getElementById('plaintext').value.toLowerCase().replace(/\s+/g, ''); // Remove spaces
     const key = document.getElementById('key').value.toLowerCase().replace(/\s+/g, ''); // Remove spaces
+
+    if (!plaintext || !key) {
+        alert("Please enter both text and a key.");
+        return;
+    }
+
     const mode = document.querySelector('input[name="mode"]:checked').value; // Get encryption or decryption mode
 
     let result;
@@ -176,4 +182,10 @@ function generateRandomKey() {
     }
 
     document.getElementById('key').value = randomKey; // Set the generated key
+}
+
+// Function to toggle the "How to Use" section
+function toggleHowToUse() {
+    const howToUseContent = document.getElementById("howToUseContent");
+    howToUseContent.style.display = (howToUseContent.style.display === "block") ? "none" : "block";
 }
