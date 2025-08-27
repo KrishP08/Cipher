@@ -532,3 +532,7 @@ th { /* Table headers distinct */
     /* font-size, margin, text-align, border-radius, border, background-color, color, box-sizing, display, transition
        are inherited from the earlier .matrix-cell rule or global styles */
 }
+
+.how-to-use-section .collapse-content {
+    display: none;
+}

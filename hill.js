@@ -223,5 +223,13 @@ function generateRandomPlaintext() {
 // Function to toggle the "How to Use" section
 function toggleHowToUse() {
     const howToUseContent = document.getElementById("howToUseContent");
-    howToUseContent.style.display = (howToUseContent.style.display === "block") ? "none" : "block";
+    const button = document.querySelector(".how-to-use-section .expand-btn");
+
+    if (howToUseContent.style.display === "block") {
+        howToUseContent.style.display = "none";
+        button.textContent = "How to Use";
+    } else {
+        howToUseContent.style.display = "block";
+        button.textContent = "Hide";
+    }
 }

@@ -33,6 +33,32 @@
     </div>
 
     <div class="hill-main-wrapper content-fade-in">
+        <!-- "How to Use" Section -->
+        <div class="how-to-use-section">
+            <button class="expand-btn" onclick="toggleHowToUse()">How to Use</button>
+            <div class="collapse-content" id="howToUseContent">
+                <h3>Welcome to the Hill Cipher Tool!</h3>
+                <p>The Hill cipher is a polygraphic substitution cipher based on linear algebra. Each letter is represented by a number, and a matrix is used as the key.</p>
+
+                <h4>To Encrypt a Message:</h4>
+                <ol>
+                    <li><strong>Set Matrix Size:</strong> Choose a size for the key matrix (e.g., 2 for a 2x2 matrix).</li>
+                    <li><strong>Enter Key Matrix:</strong> Fill in the key matrix with numbers. The matrix must be invertible for decryption to be possible. You can also generate a random key.</li>
+                    <li><strong>Enter Plaintext:</strong> Type the message you want to encrypt. It will be automatically padded if its length isn't a multiple of the matrix size.</li>
+                    <li><strong>Click Encrypt:</strong> The encrypted message will appear in the "Output" box.</li>
+                </ol>
+
+                <h4>To Decrypt a Message:</h4>
+                <ol>
+                    <li><strong>Set Matrix Size and Key:</strong> Use the same matrix size and key that were used for encryption.</li>
+                    <li><strong>Enter Ciphertext:</strong> Paste the encrypted text into the "Ciphertext" field.</li>
+                    <li><strong>Click Decrypt:</strong> The original message will be revealed in the "Output" box.</li>
+                </ol>
+
+                <p><strong>Note:</strong> The determinant of the key matrix must not be zero and must not share any common factors with 26 for the cipher to be decryptable.</p>
+            </div>
+        </div>
+
         <div class="hill-section hill-config-section">
             <h3>Key Configuration</h3>
             <label for="matrix-size">Enter Matrix Size:</label>
@@ -65,32 +91,6 @@
         <div class="hill-section hill-output-section">
             <h2>Output:</h2>
             <div class="output" id="output"></div>
-        </div>
-
-        <!-- "How to Use" Section -->
-        <div class="how-to-use-section">
-            <button class="expand-btn" onclick="toggleHowToUse()">How to Use</button>
-            <div class="collapse-content" id="howToUseContent">
-                <h3>Welcome to the Hill Cipher Tool!</h3>
-                <p>The Hill cipher is a polygraphic substitution cipher based on linear algebra. Each letter is represented by a number, and a matrix is used as the key.</p>
-
-                <h4>To Encrypt a Message:</h4>
-                <ol>
-                    <li><strong>Set Matrix Size:</strong> Choose a size for the key matrix (e.g., 2 for a 2x2 matrix).</li>
-                    <li><strong>Enter Key Matrix:</strong> Fill in the key matrix with numbers. The matrix must be invertible for decryption to be possible. You can also generate a random key.</li>
-                    <li><strong>Enter Plaintext:</strong> Type the message you want to encrypt. It will be automatically padded if its length isn't a multiple of the matrix size.</li>
-                    <li><strong>Click Encrypt:</strong> The encrypted message will appear in the "Output" box.</li>
-                </ol>
-
-                <h4>To Decrypt a Message:</h4>
-                <ol>
-                    <li><strong>Set Matrix Size and Key:</strong> Use the same matrix size and key that were used for encryption.</li>
-                    <li><strong>Enter Ciphertext:</strong> Paste the encrypted text into the "Ciphertext" field.</li>
-                    <li><strong>Click Decrypt:</strong> The original message will be revealed in the "Output" box.</li>
-                </ol>
-
-                <p><strong>Note:</strong> The determinant of the key matrix must not be zero and must not share any common factors with 26 for the cipher to be decryptable.</p>
-            </div>
         </div>
     </div>
     <script src="hill.js"></script>
