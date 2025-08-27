@@ -111,9 +111,23 @@ function runHillCipher(mode) {
     outputDiv.classList.remove('result-fade-in'); // Remove class if already present
     void outputDiv.offsetWidth; // Trigger reflow
 
+    // Validate key matrix
+    for (let row of keyMatrix) {
+        for (let cell of row) {
+            if (isNaN(cell)) {
+                alert("Please fill in the entire key matrix.");
+                return;
+            }
+        }
+    }
+
     if (mode === 'encrypt') {
         // Encryption logic
         let plaintext = document.getElementById("plaintext").value.toUpperCase().replace(/\s+/g, '');
+        if (!plaintext) {
+            alert("Please enter plaintext.");
+            return;
+        }
         plaintext = padPlaintext(plaintext, matrixSize);
         const parts = divideString(plaintext, matrixSize);
         let ciphertext = '';
@@ -145,6 +159,10 @@ function runHillCipher(mode) {
     } else if (mode === 'decrypt') {
         // Decryption logic
         let ciphertext = document.getElementById("ciphertext").value.toUpperCase().replace(/\s+/g, '');
+        if (!ciphertext) {
+            alert("Please enter ciphertext.");
+            return;
+        }
         const inverseKeyMatrix = inverseMatrix(keyMatrix);  // Calculate inverse key matrix
         const parts = divideString(ciphertext, matrixSize);
         let decryptedText = '';
@@ -200,4 +218,10 @@ function generateRandomPlaintext() {
     }
 
     document.getElementById("plaintext").value = randomPlaintext; // Set the generated random plaintext
+}
+
+// Function to toggle the "How to Use" section
+function toggleHowToUse() {
+    const howToUseContent = document.getElementById("howToUseContent");
+    howToUseContent.style.display = (howToUseContent.style.display === "block") ? "none" : "block";
 }

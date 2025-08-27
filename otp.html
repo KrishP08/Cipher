@@ -49,6 +49,33 @@
         </form>
 
         <div id="output" class="output"></div>
+
+        <!-- "How to Use" Section -->
+        <div class="how-to-use-section">
+            <button class="expand-btn" onclick="toggleHowToUse()">How to Use</button>
+            <div class="collapse-content" id="howToUseContent">
+                <h3>Welcome to the One-Time Pad (OTP) Cipher Tool!</h3>
+                <p>The One-Time Pad is an unbreakable cipher that requires a random key as long as the message. Each character is combined with a key character to produce the ciphertext.</p>
+
+                <h4>To Encrypt a Message:</h4>
+                <ol>
+                    <li><strong>Enter Plaintext:</strong> Type the message you want to encrypt in the "Text" field.</li>
+                    <li><strong>Enter Key:</strong> Provide a key that is at least as long as the plaintext. You can also generate a random key.</li>
+                    <li><strong>Select Mode:</strong> Choose "Encrypt".</li>
+                    <li><strong>Click Submit:</strong> The encrypted message will appear in the output box.</li>
+                </ol>
+
+                <h4>To Decrypt a Message:</h4>
+                <ol>
+                    <li><strong>Enter Ciphertext:</strong> Paste the encrypted text into the "Text" field.</li>
+                    <li><strong>Use the Original Key:</strong> Enter the exact same key that was used for encryption.</li>
+                    <li><strong>Select Mode:</strong> Choose "Decrypt".</li>
+                    <li><strong>Click Submit:</strong> The original message will be revealed.</li>
+                </ol>
+
+                <p><strong>Security Note:</strong> A key should never be reused. For true one-time pad security, the key must be random, used only once, and kept secret.</p>
+            </div>
+        </div>
     </div>
 
     <script src="otp.js"></script>

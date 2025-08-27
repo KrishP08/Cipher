@@ -105,6 +105,11 @@ document.getElementById('cipherForm').addEventListener('submit', function(event)
     const key = document.getElementById('key').value;
     const text = document.getElementById('plaintext').value;
 
+    if (!key || !text) {
+        alert("Please enter both a key and text.");
+        return;
+    }
+
     if (operation === 'encrypt') {
         const { result: encResult, ciphertext } = playfairEncrypt(text, key);
         const resultBox = document.getElementById('resultBox');
@@ -223,3 +228,9 @@ menuBtn.addEventListener('click', function() {
     navMenu.classList.toggle('active');
 });
 */
+
+// Function to toggle the "How to Use" section
+function toggleHowToUse() {
+    const howToUseContent = document.getElementById("howToUseContent");
+    howToUseContent.style.display = (howToUseContent.style.display === "block") ? "none" : "block";
+}

@@ -45,6 +45,24 @@
             <h3>Rail Fence Structure:</h3>
             <div id="fenceContainer"></div>
         </div>
+
+        <!-- "How to Use" Section -->
+        <div class="how-to-use-section">
+            <button class="expand-btn" onclick="toggleHowToUse()">How to Use</button>
+            <div class="collapse-content" id="howToUseContent">
+                <h3>Welcome to the Rail Fence Cipher Tool!</h3>
+                <p>The Rail Fence cipher is a form of transposition cipher that gets its name from the way in which it is encoded. The plaintext is written downwards and diagonally on successive "rails" of an imaginary fence.</p>
+
+                <h4>To Encrypt a Message:</h4>
+                <ol>
+                    <li><strong>Enter Plaintext:</strong> Type the message you want to encrypt in the text area.</li>
+                    <li><strong>Enter Number of Rails:</strong> Specify the number of rails to be used for the fence.</li>
+                    <li><strong>Click Encrypt:</strong> The encrypted message and the rail fence structure will be displayed.</li>
+                </ol>
+
+                <p><strong>Note:</strong> This tool currently only supports encryption.</p>
+            </div>
+        </div>
     </div>
 
     <script src="Railfence.js"></script>
