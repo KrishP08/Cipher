@@ -11,3 +11,8 @@
 ![image_20251028_140516_0000](https://blueprint.hackclub.com/user-attachments/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6NjE3MywicHVyIjoiYmxvYl9pZCJ9fQ==--256d2ad5d7515a17c117196d94728fca828ca54a/image_20251028_140516_0000.png)
 The fire extinguish robot Car is idea that can be use many way but it first and most important use to extinguish the fire and help fire fighter get people that are stuck in building because many fire injuries are happen because when fire spread building collapse and people are stuck.i got this idea because I say it when people get stuck in building with fire and they did not have any way to got so this is try to help many people that can and make as chipe as can  
 
+## 11/1/2025 - Tacking Advices  
+
+![4](https://blueprint.hackclub.com/user-attachments/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6NzMzMywicHVyIjoiYmxvYl9pZCJ9fQ==--f1ab8abafac59a165df0a155bcfb62bdfc34589f/4.png)
+So I am asking some of people who work in filid of fire and i did basics cricket design with esp32 that is for basic for advice we going use pi or jetson,the people i get advice they say my idea is good but the main thing to keep in mide is the car body it did not get demage in fire or any other demage so for now my Main gole is car running, water pump and make it detects fire with camera and it sencer and i also try to make a controller to control the car  
+
